@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
             animator.SetBool("isMoving", false);
             ChangeDirection();
         }
-        
+
         if (Input.GetButton("Vertical"))
         {
             if (Input.GetAxis("Vertical") < 0)
@@ -39,32 +39,37 @@ public class PlayerController : MonoBehaviour
                 animator.SetBool("isMoving", true);
                 Boost();
             }
-                
         }
-            
     }
 
     private void ChangeDirection()
     {
-        var rotation = Quaternion.AngleAxis(Input.GetAxis("Horizontal"), Vector3.back);
-
+        var rotation = Quaternion.AngleAxis(Input.GetAxis("Horizontal")/2, Vector3.back);
+        
         rocketDirection = rotation * rocketDirection;
         transform.rotation *= rotation;
     }
     
     private void Slow()
     {
-        spaceship.velocity -= (spaceship.velocity / 100);
+        var velocity = spaceship.velocity;
+        velocity -= (velocity / 100);
+        
+        spaceship.velocity = velocity;
     }
 
     private void Boost()
     {
-        var velocity = spaceship.GetPointVelocity(spaceship.velocity);
-        var v = (velocity.x * velocity.x + velocity.y + velocity.y);
+        var f = Input.GetAxis("Vertical") * 0.01f * rocketDirection;
+        var newForce = new Vector2(f.x, f.y);
 
-        if (v < 2)
+        if ((newForce + spaceship.GetPointVelocity(spaceship.velocity)).magnitude < 0.8)
         {
-            spaceship.AddForce(Input.GetAxis("Vertical") * 0.01f * rocketDirection, ForceMode2D.Impulse);
+            spaceship.AddForce(newForce, ForceMode2D.Impulse);
+        }
+        else
+        {
+            ChangeDirection();
         }
     }
 }
