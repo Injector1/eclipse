@@ -7,7 +7,7 @@ public class PlayerCollision : MonoBehaviour
 {
     void Death()
     {
-        throw new Exception();
+        throw new NotImplementedException();
     }
 
     void OnCollisionEnter2D(Collision2D collision)
