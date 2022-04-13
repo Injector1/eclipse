@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    async private void Update()
+    private async void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -37,7 +37,7 @@ public class PlayerController : MonoBehaviour
             ChangeDirection();
         }
 
-        else if (Input.GetButton("Vertical"))
+        if (Input.GetButton("Vertical"))
         {
             if (Input.GetAxis("Vertical") < 0)
             {
@@ -76,6 +76,7 @@ public class PlayerController : MonoBehaviour
 
     private void Boost()
     {
+        // TODO -> separate change direction logic from boost function
         var f = Input.GetAxis("Vertical") * 0.01f * rocketDirection;
         var newForce = new Vector2(f.x, f.y);
 
@@ -86,6 +87,8 @@ public class PlayerController : MonoBehaviour
         else
         {
             ChangeDirection();
+            Slow();
+            spaceship.AddForce(newForce, ForceMode2D.Impulse);
         }
     }
 }
