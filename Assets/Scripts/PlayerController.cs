@@ -1,16 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using System;
+using System.Threading.Tasks;
 
 public class PlayerController : MonoBehaviour
 {
     Animator animator;
-
-    [SerializeField]
-    private Vector3 rocketDirection = new Vector3(0, 1, 0);
-    private Rigidbody2D spaceship;
-    private SpriteRenderer sprite;
+    [SerializeField] private Transform gun;
+    [SerializeField] private GameObject bullet;
+    [SerializeField] private Vector3 rocketDirection = new Vector3(0, 1, 0);
+    [SerializeField] private Rigidbody2D spaceship;
+    [SerializeField] private SpriteRenderer sprite;
 
     private void Awake()
     {
@@ -19,19 +21,26 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    private void Update()
+    async private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            animator.SetBool("isShooting", true);
+            Instantiate(bullet, gun.position, transform.rotation);
+            await Task.Delay(500);
+            animator.SetBool("isShooting", false);
+        }
+
         if (Input.GetButton("Horizontal"))
         {
             animator.SetBool("isMoving", false);
             ChangeDirection();
         }
 
-        if (Input.GetButton("Vertical"))
+        else if (Input.GetButton("Vertical"))
         {
             if (Input.GetAxis("Vertical") < 0)
             {
-                //animator.SetBool("isShooting", true);
                 animator.SetBool("isMoving", false);
                 Slow();
             }
@@ -41,6 +50,12 @@ public class PlayerController : MonoBehaviour
                 Boost();
             }
         }
+        else
+        {
+            animator.SetBool("isMoving", false);
+        }
+
+        //animator.SetBool("isShooting", false);
     }
 
     private void ChangeDirection()
