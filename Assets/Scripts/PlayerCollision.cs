@@ -1,15 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using System;
-using System.Threading;
+using System.Threading.Tasks;
 
 public class PlayerCollision : MonoBehaviour
 {
-    List<string> animations = new List<string>{
+    List<string> animations = new List<string>
+    {
         "isShooting",
         "isMoving"
     };
+
     Animator animator;
 
     void StopAnimations()
@@ -22,13 +26,13 @@ public class PlayerCollision : MonoBehaviour
         }
     }
 
-    void Death()
+    async void Death()
     {
         StopAnimations();
         animator.SetBool("isDead", true);
-        // Add delay (1 sec)
-        
-        //throw new NotImplementedException();
+        Time.timeScale = 1f;
+        await Task.Delay(600); //600 ms to play animation
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     void OnCollisionEnter2D(Collision2D collision)
