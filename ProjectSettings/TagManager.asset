@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Planet
+  - Physical scene
+  - Bullets
   layers:
   - Default
   - TransparentFX
