@@ -1,11 +1,12 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public class CoolDown
+public class CoolDown : MonoBehaviour
 {
     private bool isCoolDown;
-    public int CoolDownInMs;
+    [SerializeField] public int CoolDownInMs;
 
     public bool TryToShoot()
     {
@@ -18,13 +19,9 @@ public class CoolDown
 
     private void Wait(int cdTime)
     {
+        if (cdTime < 0)
+            return;
         Thread.Sleep(cdTime);
         isCoolDown = false;
-    }
-
-    public CoolDown(int coolDownInMs)
-    {
-        isCoolDown = false;
-        CoolDownInMs = coolDownInMs;
     }
 }
