@@ -1,13 +1,24 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private float speed = 10f;
-
-    private void Update()
+    private new Rigidbody2D rigidbody;
+    [SerializeField] private int LifeTime = 5;
+    [SerializeField] private int Speed = 500;
+    
+    private void Awake()
     {
-        transform.Translate(Vector2.up * speed * Time.deltaTime);
+        rigidbody = GetComponent<Rigidbody2D>();
+    }
+
+    private void Start()
+    {
+        rigidbody.AddForce(Speed * (transform.rotation * Vector2.up));
+        Destroy(gameObject, LifeTime);
     }
 }
