@@ -9,7 +9,7 @@ public class Bullet : MonoBehaviour
 {
     private new Rigidbody2D rigidbody;
     [SerializeField] private int LifeTime = 5;
-    [SerializeField] private int Speed = 500;
+    [SerializeField] private float Speed = 0.001f;
     
     private void Awake()
     {
@@ -18,7 +18,7 @@ public class Bullet : MonoBehaviour
 
     private void Start()
     {
-        rigidbody.AddForce(Speed * (transform.rotation * Vector2.up));
+        rigidbody.velocity =  Speed * (transform.rotation * Vector2.up);
         Destroy(gameObject, LifeTime);
     }
 }
