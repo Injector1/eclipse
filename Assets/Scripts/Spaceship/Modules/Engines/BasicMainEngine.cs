@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 
-public class BasicMainEngine : MonoBehaviour, IEngine, ISpaceshipModule
+public class BasicMainEngine : MonoBehaviour, IEngine
 {
     [SerializeField] private float MaxSpeedSqr = 200f;
     [SerializeField] private float Power = 0.1f;
@@ -23,7 +23,6 @@ public class BasicMainEngine : MonoBehaviour, IEngine, ISpaceshipModule
         spaceship.OnBoost += Boost;
         spaceship.OnSlowDown += SlowDown;
         spaceshipTransform = spaceship.transform;
-        spaceship.AddModule(this, typeof(IEngine));
     }
     
     private void ChangeDirection(float axis)

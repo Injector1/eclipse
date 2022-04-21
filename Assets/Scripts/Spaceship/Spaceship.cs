@@ -9,18 +9,10 @@ public class Spaceship : MonoBehaviour
     public Action<float> OnRotate;
     public Action<float> OnBoost;
     public Action<float> OnSlowDown;
+    public Action OnDeath;
 
     private void Awake()
     {
         Rigidbody = GetComponent<Rigidbody2D>();
-        Modules = new Dictionary<Type, HashSet<ISpaceshipModule>>();
-    }
-
-    public Dictionary<Type, HashSet<ISpaceshipModule>> Modules;
-    public void AddModule(ISpaceshipModule module, Type moduleType)
-    {
-        if (!Modules.TryGetValue(moduleType, out var modulesSet))
-            modulesSet = new HashSet<ISpaceshipModule>();
-        modulesSet.Add(module);
     }
 }

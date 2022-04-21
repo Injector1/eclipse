@@ -3,7 +3,7 @@ using System;
 using System.Threading.Tasks;
 using Random = System.Random;
 
-public class PlasmaGun : MonoBehaviour, IWeapon, ISpaceshipModule
+public class PlasmaGun : MonoBehaviour, IWeapon
 {
     [SerializeField] private float Spreading;
     [SerializeField] private GameObject GameObjectWithBullets;
@@ -23,7 +23,6 @@ public class PlasmaGun : MonoBehaviour, IWeapon, ISpaceshipModule
     public void Start()
     {
         spaceship.OnShoot += Shoot;
-        spaceship.AddModule(this, typeof(IWeapon));
         bullet = transform.GetChild(0).gameObject;
     }
     

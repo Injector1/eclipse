@@ -16,4 +16,6 @@ public class Bullet : MonoBehaviour
         rigidbody.velocity =  Speed * (transform.rotation * Vector2.up);
         Destroy(gameObject, LifeTime);
     }
+    
+    
 }

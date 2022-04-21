@@ -3,35 +3,34 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
 
-public class PlayerCollision : MonoBehaviour
+public class Health : MonoBehaviour
 {
-    private Animator animator;
     public HealthBar healthBar;
-    public int maxHealth = 10;
+    private Spaceship spaceship;
+    [SerializeField] public int MaxHealth = 10;
     private int currentHealth;
 
     private void Awake()
     {
-        healthBar.SetMaxHealth(maxHealth);
-        currentHealth = maxHealth;
+        spaceship = GetComponent<Spaceship>();
+        healthBar.SetMaxHealth(MaxHealth);
+        currentHealth = MaxHealth;
     }
 
-    void StopAnimations()
+    private void Start()
     {
-        animator.SetBool("isShooting", false);
-        animator.SetBool("isMoving", false);
-        animator.SetBool("isDead", true);
+        spaceship.OnDeath += Death;
     }
 
     async void Death()
     {
-        animator = GetComponent<Animator>();
-        StopAnimations();
         Time.timeScale = 1f;
         await Task.Delay(1200); //1200 ms to play animation
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
-
+    
+    
+    //TODO fix
     void OnCollisionEnter2D(Collision2D collision)
     {
         var collisionObject = collision.gameObject.tag;
@@ -50,7 +49,7 @@ public class PlayerCollision : MonoBehaviour
         if (currentHealth <= 0)
         {
             healthBar.SetHealth(0);
-            Death();
+            spaceship.OnDeath?.Invoke();
         }
     }
 }
