@@ -6,7 +6,6 @@ public class Gravity : MonoBehaviour
 {
     public const float G = 0.001f;
 
-    [SerializeField] private Vector3 startVelocity;
     private new Rigidbody2D rigidbody;
     private CircleCollider2D planetCollider;
     private GravityZoneTrigger _gravityZoneTrigger;
@@ -18,7 +17,6 @@ public class Gravity : MonoBehaviour
         _gravityZoneTrigger = GetComponentInChildren<GravityZoneTrigger>();
         visitors = new HashSet<GravityVisitor>();
         rigidbody = GetComponent<Rigidbody2D>();
-        rigidbody.velocity = startVelocity;
     }
 
     private void FixedUpdate()
