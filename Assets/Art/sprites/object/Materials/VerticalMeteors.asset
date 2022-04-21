@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: space6
+  m_Name: VerticalMeteors
   m_EditorClassIdentifier: 
-  m_Sprite: {fileID: 21300000, guid: df60f36e8fc957b42ac646ddc5fc1092, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b28dde498a8b841479723751ef9c4618, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1

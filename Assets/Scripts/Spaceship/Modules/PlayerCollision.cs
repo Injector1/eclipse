@@ -36,10 +36,18 @@ public class PlayerCollision : MonoBehaviour
     {
         var collisionObject = collision.gameObject.tag;
 
-        if (collisionObject == "Planet") 
-            TakeDamage(3);
-        if (collisionObject == "Bullets")
-            TakeDamage(1);
+        switch (collisionObject)
+        {
+            case "Planet":
+                TakeDamage(3);
+                break;
+            case "EnemyBullets":
+                TakeDamage(1);
+                break;
+            case "Asteroids":
+                TakeDamage(100);
+                break;
+        }
     }
 
     void TakeDamage(int damage)
