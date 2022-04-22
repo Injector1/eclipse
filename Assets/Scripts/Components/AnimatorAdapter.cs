@@ -6,6 +6,7 @@ using UnityEngine;
 public class AnimatorAdapter : MonoBehaviour
 {
     private Animator animator;
+    private Health health;
     private Spaceship spaceship;
     private readonly string[] AnimationStates = new[] {"isMoving", "isShooting", "isDead"};
     private readonly Dictionary<string, DateTime> LastUpdated = new Dictionary<string, DateTime>();
@@ -14,13 +15,14 @@ public class AnimatorAdapter : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         spaceship = GetComponent<Spaceship>();
+        health = GetComponent<Health>();
     }
 
     private void Start()
     {
         spaceship.OnBoost += _ => StartAnimation("isMoving", 100);
-        spaceship.OnShoot += _ => StartAnimation("isShooting", 500);
-        spaceship.OnDeath += () => { StopAllAnimations(); StartAnimation("isDead"); };
+        spaceship.OnShoot += _ => StartAnimation("isShooting", 100);
+        health.OnDeath += () => { StopAllAnimations(); StartAnimation("isDead"); };
     }
 
     public void StopAllAnimations()

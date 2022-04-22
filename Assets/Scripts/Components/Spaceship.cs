@@ -9,7 +9,6 @@ public class Spaceship : MonoBehaviour
     public Action<float> OnRotate;
     public Action<float> OnBoost;
     public Action<float> OnSlowDown;
-    public Action OnDeath;
 
     private void Awake()
     {

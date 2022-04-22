@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Spaceship spaceship;
+    private Health health;
     private Animator animator;
     private SavedInput<float> horizontalAxis;
     private SavedInput<float> verticalAxis;
@@ -15,6 +16,7 @@ public class PlayerController : MonoBehaviour
     {
         spaceship = GetComponent<Spaceship>();
         animator = GetComponent<Animator>();
+        health = GetComponent<Health>();
         horizontalAxis = new SavedInput<float>();
         verticalAxis = new SavedInput<float>();
         mousePosition = new SavedInput<Vector3>();
@@ -22,12 +24,12 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        spaceship.OnDeath += () => IsDisabled = true;
+        health.OnDeath += () => IsDisabled = true;
     }
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetButton("Fire1"))
             mousePosition.Value = Input.mousePosition;
 
         if (Input.GetButton("Horizontal"))
