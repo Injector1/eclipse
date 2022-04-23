@@ -7,32 +7,34 @@ public class PlasmaGun : MonoBehaviour, IWeapon
 {
     [SerializeField] private float Spreading;
     [SerializeField] private GameObject GameObjectWithBullets;
-    private CoolDown coolDown;
-    private Spaceship spaceship;
-    private GameObject bullet;
-    private Random random;
 
+    private Actions _actions;
+    private CoolDown _coolDown;
+    private GameObject _bullet;
+    private Random _random;
+
+    
     public void Awake()
     {
-        spaceship = GetComponentInParent<Spaceship>();
-        coolDown = GetComponent<CoolDown>();
+        _actions = GetComponentInParent<Actions>();
+        _coolDown = GetComponent<CoolDown>();
         GameObjectWithBullets = GameObject.FindWithTag("Bullets");
-        random = new Random();
+        _random = new Random();
     }
     
     public void Start()
     {
-        spaceship.OnShoot += Shoot;
-        bullet = transform.GetChild(0).gameObject;
+        _actions.OnShoot += Shoot;
+        _bullet = transform.GetChild(0).gameObject;
     }
     
     private void Shoot(Vector3 target)
     {
-        if (!coolDown.TryToShoot())
+        if (!_coolDown.TryToShoot())
             return;
         
-        var spreadingAngle = Quaternion.Euler(0, 0, Spreading * (float) (0.5 - random.NextDouble()));
-        var newBullet = Instantiate(bullet, transform.position, transform.rotation * spreadingAngle);
+        var spreadingAngle = Quaternion.Euler(0, 0, Spreading * (float) (0.5 - _random.NextDouble()));
+        var newBullet = Instantiate(_bullet, transform.position, transform.rotation * spreadingAngle);
         
         newBullet.transform.parent = GameObjectWithBullets.transform;
         newBullet.SetActive(true);

@@ -3,24 +3,32 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
 
+public partial class Actions : MonoBehaviour
+{
+    public Action<float> OnHealthChange;
+    public Action OnDeath;
+}
+
 public class Health : MonoBehaviour
 {
     [SerializeField] public float MaxHealth = 100;
-    private Spaceship spaceship;
     public float CurrentHealth;
-    public Action<float> OnHealthChange;
-    public Action OnDeath;
+    private Actions _actions;
 
     private void Awake()
     {
-        spaceship = GetComponent<Spaceship>();
         CurrentHealth = MaxHealth;
-        OnHealthChange += HealthAdd;
-        OnDeath += Death;
+        _actions = GetComponent<Actions>();
     }
-    
 
-    async void Death()
+    private void Start()
+    {
+        _actions.OnHealthChange += HealthAdd;
+        _actions.OnDeath += Death;
+    }
+
+    //TODO перенести в interesting game manager
+    void Death()
     {   
         if (!gameObject.CompareTag("Player"))
         {
@@ -36,7 +44,7 @@ public class Health : MonoBehaviour
         CurrentHealth += hpAdd;
         if (CurrentHealth <= 1e-3)
         {
-            OnDeath?.Invoke();
+            _actions.OnDeath?.Invoke();
             return;
         }
         CurrentHealth %= MaxHealth;

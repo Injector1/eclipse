@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private Spaceship spaceship;
-    private Health health;
-    private Animator animator;
+    private Actions _actions;
     private SavedInput<float> horizontalAxis;
     private SavedInput<float> verticalAxis;
     private SavedInput<Vector3> mousePosition;
@@ -14,9 +12,7 @@ public class PlayerController : MonoBehaviour
 
     public void Awake()
     {
-        spaceship = GetComponent<Spaceship>();
-        animator = GetComponent<Animator>();
-        health = GetComponent<Health>();
+        _actions = GetComponent<Actions>();
         horizontalAxis = new SavedInput<float>();
         verticalAxis = new SavedInput<float>();
         mousePosition = new SavedInput<Vector3>();
@@ -24,7 +20,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        health.OnDeath += () => IsDisabled = true;
+        _actions.OnDeath += () => IsDisabled = true;
     }
 
     public void Update()
@@ -47,17 +43,17 @@ public class PlayerController : MonoBehaviour
         
         if (mousePosition.IsUpdated)
         {
-            var lookVector = mousePosition.Value - Camera.main.WorldToScreenPoint(spaceship.transform.position);
-            spaceship.OnShoot?.Invoke(lookVector);
+            var lookVector = mousePosition.Value - Camera.main.WorldToScreenPoint(transform.position);
+            _actions.OnShoot?.Invoke(lookVector);
         }
 
         if (horizontalAxis.IsUpdated) 
-            spaceship.OnRotate?.Invoke(horizontalAxis.Value);
+            _actions.OnRotate?.Invoke(horizontalAxis.Value);
         
         if (verticalAxis.IsUpdated)
         {
-            if (verticalAxis.Value > 0) spaceship.OnBoost?.Invoke(verticalAxis.Value);
-            else spaceship.OnSlowDown?.Invoke(verticalAxis.Value);
+            if (verticalAxis.Value > 0) _actions.OnBoost?.Invoke(verticalAxis.Value);
+            else _actions.OnSlowDown?.Invoke(verticalAxis.Value);
         }
     }
 }

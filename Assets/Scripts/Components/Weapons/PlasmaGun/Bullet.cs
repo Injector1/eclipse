@@ -15,9 +15,7 @@ public class Bullet : MonoBehaviour
     {
         rigidbody.velocity =  Speed * (transform.rotation * Vector2.up);
         var collider = GetComponent<Collider2D>();
-        EventPlanner.PostponeAnEvent(() => collider.enabled = true, 5);
-        if (gameObject?.activeSelf is null)
-            return;
-        Destroy(gameObject, LifeTime);
+        EventPlanner.PostponeAnEvent(() => collider.enabled = true, LifeTime);
+        EventPlanner.PostponeAnEvent(() => Destroy(gameObject), 3000);
     }
 }

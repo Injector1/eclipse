@@ -5,34 +5,38 @@ using UnityEngine;
 
 public class BotEnemyController : MonoBehaviour
 {
-    private Spaceship spaceship;
-    private Spaceship player;
+    private Actions _actions;
+    private Rigidbody2D _rigidbody;
+    private GameObject _player;
+    private Rigidbody2D _playerRigidbody;
 
-    public void Awake()
+    private void Awake()
     {
-        spaceship = GetComponent<Spaceship>();
+        _actions = GetComponent<Actions>();
+        _rigidbody = GetComponent<Rigidbody2D>();
+        _player = GameObject.FindWithTag("Player");
     }
 
     public void Start()
     {
-        player = GameObject.FindWithTag("Player").GetComponent<Spaceship>();
+        _playerRigidbody = _player.GetComponent<Rigidbody2D>();
     }
     
     public void FixedUpdate()
     {
-        var playerPosition = player.Rigidbody.position;
-        var spaceshipPosition = spaceship.Rigidbody.position;
+        var playerPosition = _playerRigidbody.position;
+        var spaceshipPosition = _rigidbody.position;
         var toPlayer = playerPosition - spaceshipPosition;
-        var lookVector = spaceship.transform.rotation * Vector2.up;
-        spaceship.OnRotate?.Invoke(GetRotationValue(lookVector, toPlayer));
+        var lookVector = transform.rotation * Vector2.up;
+        _actions.OnRotate?.Invoke(GetRotationValue(lookVector, toPlayer));
         if (toPlayer.magnitude < 5)
         {
-            spaceship.OnBoost?.Invoke(0.5f);
-            spaceship.OnShoot?.Invoke(toPlayer);
+            _actions.OnBoost?.Invoke(0.5f);
+            _actions.OnShoot?.Invoke(toPlayer);
         }
         else
         {
-            spaceship.OnBoost?.Invoke(1);
+            _actions.OnBoost?.Invoke(1);
         }
     }
     

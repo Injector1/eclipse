@@ -5,24 +5,22 @@ using UnityEngine;
 
 public class AnimatorAdapter : MonoBehaviour
 {
-    private Animator animator;
-    private Health health;
-    private Spaceship spaceship;
+    private Actions _actions;
+    private Animator _animator;
     private readonly string[] AnimationStates = new[] {"isMoving", "isShooting", "isDead"};
     private readonly Dictionary<string, DateTime> LastUpdated = new Dictionary<string, DateTime>();
 
     private void Awake()
     {
-        animator = GetComponent<Animator>();
-        spaceship = GetComponent<Spaceship>();
-        health = GetComponent<Health>();
+        _actions = GetComponent<Actions>();
+        _animator = GetComponent<Animator>();
     }
 
     private void Start()
     {
-        spaceship.OnBoost += _ => StartAnimation("isMoving", 100);
-        spaceship.OnShoot += _ => StartAnimation("isShooting", 100);
-        health.OnDeath += () => { StopAllAnimations(); StartAnimation("isDead"); };
+        _actions.OnBoost += _ => StartAnimation("isMoving", 100);
+        _actions.OnShoot += _ => StartAnimation("isShooting", 100);
+        _actions.OnDeath += () => { StopAllAnimations(); StartAnimation("isDead"); };
     }
 
     public void StopAllAnimations()
@@ -31,26 +29,24 @@ public class AnimatorAdapter : MonoBehaviour
             StopAnimation(state);
     }
     
-    async public void StartAnimation(string state, int durationInMs)
+    public void StartAnimation(string state, int durationInMs)
     {
         StartAnimation(state);
-        await Task.Delay(durationInMs);
-        try
+        EventPlanner.PostponeAnEvent(() =>
         {
             if (LastUpdated[state].AddMilliseconds(durationInMs) <= DateTime.Now)
                 StopAnimation(state);
-        }
-        catch { /* ignored */ }
+        }, durationInMs);
     }
     
     public void StartAnimation(string state)
     {
         LastUpdated[state] = DateTime.Now;
-        animator.SetBool(state, true);
+        _animator.SetBool(state, true);
     }
     
     public void StopAnimation(string state)
     {
-        animator.SetBool(state, false);
+        _animator.SetBool(state, false);
     }
 }

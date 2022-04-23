@@ -13,15 +13,7 @@ public class CoolDown : MonoBehaviour
         if (isCoolDown)
             return false;
         isCoolDown = true;
-        Task.Run(() => Wait(CoolDownInMs));
+        EventPlanner.PostponeAnEvent(() => isCoolDown = false, CoolDownInMs);
         return true;
-    }
-
-    private void Wait(int cdTime)
-    {
-        if (cdTime < 0)
-            return;
-        Thread.Sleep(cdTime);
-        isCoolDown = false;
     }
 }
