@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private Actions _actions;
+    private Engine _engine;
+    private Health _health;
+    private WeaponController _weaponController;
     private SavedInput<float> horizontalAxis;
     private SavedInput<float> verticalAxis;
     private SavedInput<Vector3> mousePosition;
@@ -12,7 +14,9 @@ public class PlayerController : MonoBehaviour
 
     public void Awake()
     {
-        _actions = GetComponent<Actions>();
+        _engine = GetComponent<Engine>();
+        _health = GetComponent<Health>();
+        _weaponController = GetComponentInParent<WeaponController>();
         horizontalAxis = new SavedInput<float>();
         verticalAxis = new SavedInput<float>();
         mousePosition = new SavedInput<Vector3>();
@@ -20,7 +24,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        _actions.OnDeath += () => IsDisabled = true;
+        _health.OnDeath += () => IsDisabled = true;
     }
 
     public void Update()
@@ -44,16 +48,16 @@ public class PlayerController : MonoBehaviour
         if (mousePosition.IsUpdated)
         {
             var lookVector = mousePosition.Value - Camera.main.WorldToScreenPoint(transform.position);
-            _actions.OnShoot?.Invoke(lookVector);
+            _weaponController?.OnShoot?.Invoke(lookVector);
         }
 
         if (horizontalAxis.IsUpdated) 
-            _actions.OnRotate?.Invoke(horizontalAxis.Value);
+            _engine.OnRotate?.Invoke(horizontalAxis.Value);
         
         if (verticalAxis.IsUpdated)
         {
-            if (verticalAxis.Value > 0) _actions.OnBoost?.Invoke(verticalAxis.Value);
-            else _actions.OnSlowDown?.Invoke(verticalAxis.Value);
+            if (verticalAxis.Value > 0) _engine.OnBoost?.Invoke(verticalAxis.Value);
+            else _engine.OnSlowDown?.Invoke(verticalAxis.Value);
         }
     }
 }

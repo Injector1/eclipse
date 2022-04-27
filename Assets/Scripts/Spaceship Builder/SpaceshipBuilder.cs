@@ -3,7 +3,7 @@ using System;
 
 public static class SpaceshipBuilder
 {
-    public static void CreateNew(IEngine engine, IWeapon weapon, GameObject parent)
+    public static void CreateNew(Engine engine, Weapon weapon, GameObject parent)
     {
 
         

@@ -4,36 +4,30 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    public Slider Slider;
-    public Gradient Gradient;
-    public Image Fill;
     private Health _health;
-    private Actions _actions;
-    private GameObject _player;
+    private GameObject _healthBar;
 
     private void Awake()
     {
-        _player = GameObject.FindWithTag("Player");
+        _health = GetComponentInParent<Health>();
+        _healthBar = transform.GetChild(0).GetChild(0).GetChild(0).gameObject;
     }
-
+    
     private void Start()
     {
-        _health = _player.GetComponent<Health>();
-        _actions = _player.GetComponent<Actions>();
-        SetMaxHealth(_health.MaxHealth);
-        _actions.OnHealthChange += SetHealth;
+        _health.OnHealthChange += _ => ChangeBarRotation();
+        _health.OnDeath += ChangeBarRotation;
+        _healthBar = transform.GetChild(0).GetChild(0).GetChild(0).gameObject;
     }
 
-    public void SetMaxHealth(float maxHealth)
+    private void Update()
     {
-        Slider.maxValue = maxHealth;
-        Slider.value = maxHealth;
-        Fill.color = Gradient.Evaluate(Slider.normalizedValue);
+        if (transform.eulerAngles != Vector3.up)
+            transform.eulerAngles = Vector3.up;
     }
 
-    public void SetHealth(float healthChange)
+    private void ChangeBarRotation()
     {
-        Slider.value = _health.CurrentHealth;
-        Fill.color = Gradient.Evaluate(Slider.normalizedValue);
+        _healthBar.transform.localEulerAngles = new Vector3(0, 0, -135 + 90 * _health.CurrentHealth / _health.MaxHealth);
     }
 }

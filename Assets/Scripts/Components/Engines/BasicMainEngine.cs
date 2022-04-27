@@ -2,13 +2,12 @@
 using UnityEngine;
 
 
-public class BasicMainEngine : MonoBehaviour, IEngine
+public class BasicMainEngine : Engine
 {
     [SerializeField] private float MaxSpeedSqr = 200f;
     [SerializeField] private float Power = 0.1f;
     [SerializeField] private float Maneuverability = 4.5f;
     [SerializeField] private float OnRotateSlowDown = 20f;
-    private Actions _actions;
     private Rigidbody2D _rigidbody;
     private Transform _spaceshipTransform;
     private Vector3 _spaceshipDirection;
@@ -17,14 +16,13 @@ public class BasicMainEngine : MonoBehaviour, IEngine
     {
         _spaceshipDirection = new Vector3(0, 1);
         _rigidbody = GetComponent<Rigidbody2D>();
-        _actions = GetComponent<Actions>();
     }
     
     public void Start()
     {
-        _actions.OnRotate += ChangeDirection;
-        _actions.OnBoost += Boost;
-        _actions.OnSlowDown += SlowDown;
+        OnRotate += ChangeDirection;
+        OnBoost += Boost;
+        OnSlowDown += SlowDown;
         _spaceshipTransform = transform;
     }
     

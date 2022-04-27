@@ -5,22 +5,26 @@ using UnityEngine;
 
 public class AnimatorAdapter : MonoBehaviour
 {
-    private Actions _actions;
+    private Engine _engine;
     private Animator _animator;
+    private Health _health;
+    private WeaponController _weaponController;
     private readonly string[] AnimationStates = new[] {"isMoving", "isShooting", "isDead"};
     private readonly Dictionary<string, DateTime> LastUpdated = new Dictionary<string, DateTime>();
 
     private void Awake()
     {
-        _actions = GetComponent<Actions>();
+        _engine = GetComponent<Engine>();
+        _health = GetComponent<Health>();
         _animator = GetComponent<Animator>();
+        _weaponController = GetComponentInChildren<WeaponController>();
     }
 
     private void Start()
     {
-        _actions.OnBoost += _ => StartAnimation("isMoving", 100);
-        _actions.OnShoot += _ => StartAnimation("isShooting", 100);
-        _actions.OnDeath += () => { StopAllAnimations(); StartAnimation("isDead"); };
+        _engine.OnBoost += _ => StartAnimation("isMoving", 100);
+        _weaponController.OnShoot += _ => StartAnimation("isShooting", 100);
+        _health.OnDeath += () => { StopAllAnimations(); StartAnimation("isDead"); };
     }
 
     public void StopAllAnimations()

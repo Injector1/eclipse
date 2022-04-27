@@ -3,12 +3,12 @@ using System;
 using System.Threading.Tasks;
 using Random = System.Random;
 
-public class PlasmaGun : MonoBehaviour, IWeapon
+public class PlasmaGun : Weapon
 {
     [SerializeField] private float Spreading;
     [SerializeField] private GameObject GameObjectWithBullets;
 
-    private Actions _actions;
+    private WeaponController _weaponController;
     private CoolDown _coolDown;
     private GameObject _bullet;
     private Random _random;
@@ -16,15 +16,15 @@ public class PlasmaGun : MonoBehaviour, IWeapon
     
     public void Awake()
     {
-        _actions = GetComponentInParent<Actions>();
         _coolDown = GetComponent<CoolDown>();
+        _weaponController = GetComponentInParent<WeaponController>();
         GameObjectWithBullets = GameObject.FindWithTag("Bullets");
         _random = new Random();
     }
     
     public void Start()
     {
-        _actions.OnShoot += Shoot;
+        _weaponController.OnShoot += Shoot;
         _bullet = transform.GetChild(0).gameObject;
     }
     

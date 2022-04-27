@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 public class CollisionHandler : MonoBehaviour
 {
-    private Actions _actions;
     private Rigidbody2D _rigidbody;
+    private Health _health;
     [SerializeField] private float DamageResist = 1;
     [SerializeField] private float PhysDamageMultiplier = 1;
 
     private void Awake()
     {
-        _actions = GetComponent<Actions>();
+        _health = GetComponent<Health>();
         _rigidbody = GetComponent<Rigidbody2D>();
     }
     
@@ -31,7 +31,7 @@ public class CollisionHandler : MonoBehaviour
     public void HandleCollision(GameObject otherObject)
     {
         var damageBody = otherObject.GetComponent<DamageBody>();
-        _actions.OnHealthChange(-damageBody.GetDamage());
+        _health.OnHealthChange?.Invoke(-damageBody.GetDamage());
     }
 
     void TakePhysicalDamage(Collision2D collision)
@@ -43,6 +43,6 @@ public class CollisionHandler : MonoBehaviour
         var massOther = rbOther.bodyType == RigidbodyType2D.Dynamic ? rbOther.mass : 0;
         var sqrSpeed = collision.relativeVelocity.sqrMagnitude;
         var damage = PhysDamageMultiplier * (sqrSpeed > 0.5f ? sqrSpeed : 0) * massOther / (mass + massOther);
-        _actions.OnHealthChange?.Invoke(-damage);
+        _health.OnHealthChange?.Invoke(-damage);
     }
 }
