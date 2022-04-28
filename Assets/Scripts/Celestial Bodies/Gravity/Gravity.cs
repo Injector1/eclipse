@@ -7,14 +7,10 @@ public class Gravity : MonoBehaviour
     public const float G = 0.001f;
 
     private new Rigidbody2D rigidbody;
-    private CircleCollider2D planetCollider;
-    private GravityZoneTrigger _gravityZoneTrigger;
     private HashSet<GravityVisitor> visitors;
 
     private void Awake()
     {
-        planetCollider = GetComponent<CircleCollider2D>();
-        _gravityZoneTrigger = GetComponentInChildren<GravityZoneTrigger>();
         visitors = new HashSet<GravityVisitor>();
         rigidbody = GetComponent<Rigidbody2D>();
     }
