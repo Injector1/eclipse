@@ -9,6 +9,7 @@ TagManager:
   - Bullets
   - Health&Shield UI
   - UI Canvas
+  - Enemy
   layers:
   - Default
   - TransparentFX

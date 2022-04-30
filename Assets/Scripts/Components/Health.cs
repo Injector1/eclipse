@@ -1,16 +1,17 @@
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using System.Threading.Tasks;
-
+using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
     [SerializeField] public float MaxHealth = 100;
-
+    [SerializeField] public Text alienScore;
+    [SerializeField] public Text stationScore;
     public float CurrentHealth;
     public Action<float> OnHealthChange;
     public Action OnDeath;
+    
 
     private void Awake()
     {
@@ -24,6 +25,15 @@ public class Health : MonoBehaviour
     {   
         if (!gameObject.CompareTag("Player"))
         {
+            switch (gameObject.tag)
+            {
+                case "Enemy":
+                    alienScore.text = $"{int.Parse(alienScore.text.Split('/')[0]) + 1}/3";
+                    break;
+                case "Station":
+                    stationScore.text = $"{int.Parse(stationScore.text.Split('/')[0]) + 1}/3";
+                    break;
+            }
             Destroy(gameObject);
             return;
         }
