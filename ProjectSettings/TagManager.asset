@@ -9,6 +9,7 @@ TagManager:
   - Bullets
   - Health&Shield UI
   - UI Canvas
+  - TemplatesSpawner
   layers:
   - Default
   - TransparentFX
