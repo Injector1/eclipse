@@ -528,7 +528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4f2313edaee49e6bc94adbff6eca3a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RawDamage: 2
+  RawDamage: 10
 --- !u!1 &96097986
 GameObject:
   m_ObjectHideFlags: 0
@@ -734,7 +734,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4f2313edaee49e6bc94adbff6eca3a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RawDamage: 2
+  RawDamage: 10
 --- !u!50 &145846613
 Rigidbody2D:
   serializedVersion: 4
