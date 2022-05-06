@@ -7,6 +7,7 @@ public class PlasmaGun : Weapon
 {
     [SerializeField] private float Spreading;
     [SerializeField] private GameObject GameObjectWithBullets;
+    [SerializeField] private AudioSource shootSound;
 
     private WeaponController _weaponController;
     private CoolDown _coolDown;
@@ -30,6 +31,8 @@ public class PlasmaGun : Weapon
     
     private void Shoot(Vector3 target)
     {
+        if (!shootSound.isPlaying)
+            shootSound.Play();
         if (!_coolDown.TryToShoot())
             return;
         

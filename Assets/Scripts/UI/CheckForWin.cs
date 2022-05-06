@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Timers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,10 +9,13 @@ using UnityEngine.UI;
 
 public class CheckForWin : MonoBehaviour
 {
-    [SerializeField] public Text[] counters;
+    [SerializeField] public Text alienScore;
+    [SerializeField] public Text stationScore;
     [SerializeField] public Text result;
     [SerializeField] public GameObject victoryWindow;
+    [SerializeField] public GameObject loseWindow;
     [SerializeField] public GameObject[] ratings;
+    [SerializeField] public GameObject[] enemies;
 
     private float startTime;
     private float gameTime;
@@ -23,22 +27,20 @@ public class CheckForWin : MonoBehaviour
 
     void Update()
     {
-        foreach (var counter in counters)
+        if (enemies.Any(enemy => enemy.activeInHierarchy))
         {
-            var score = int.Parse(counter.text.Split('/')[0]);
-            var maxScore = int.Parse(counter.text.Split('/')[1]);
-
-            if (score != maxScore) return;
+            return;
         }
-        
-        GetEpisodeResult();
+
+        if (!loseWindow.activeSelf)
+            GetEpisodeResult();
     }
 
     private void GetEpisodeResult()
     {
         if (gameTime < 1e-9)
         {
-            Time.timeScale = 0.2f;
+            Time.timeScale = 0f;
 
             int rating = 0;
 
@@ -66,5 +68,12 @@ public class CheckForWin : MonoBehaviour
         victoryWindow.SetActive(false);
         Time.timeScale = 1f;
         SceneManager.LoadScene(0);
+    }
+    
+    public void RetryLevel()
+    {
+        Time.timeScale = 1f;
+        loseWindow.SetActive(false);
+        EventPlanner.PostponeAnEvent(() => SceneManager.LoadScene(SceneManager.GetActiveScene().name), 1200);
     }
 }

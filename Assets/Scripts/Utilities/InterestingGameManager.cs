@@ -5,6 +5,8 @@ public class InterestingGameManager : MonoBehaviour
 {
     private GameObject _player;
     private Health _playerHealth;
+    [SerializeField] public GameObject loseFrame;
+    [SerializeField] private AudioSource deathSound;
 
     private void Awake()
     {
@@ -20,6 +22,8 @@ public class InterestingGameManager : MonoBehaviour
 
     private void PlayerDeath()
     {
-        EventPlanner.PostponeAnEvent(() => SceneManager.LoadScene(SceneManager.GetActiveScene().name), 1200);
+        deathSound.Play();
+        Time.timeScale = 0.2f;
+        loseFrame.SetActive(true);
     }
 }

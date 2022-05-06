@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -6,11 +7,8 @@ using UnityEngine.UI;
 public class Health : MonoBehaviour
 {
     [SerializeField] public float MaxHealth = 100;
-    //TODO выпилить к хуям
-    /*
-    [SerializeField] public Text alienScore;
-    [SerializeField] public Text stationScore;
-    */
+    [SerializeField] public Text score;
+    [SerializeField] private AudioSource enemyDeath;
     public float CurrentHealth;
     public Action<float> OnHealthChange;
     public Action OnDeath;
@@ -23,20 +21,12 @@ public class Health : MonoBehaviour
         OnDeath += BasicDeath;
     }
     
-    public void BasicDeath()
-    {   
-        //TODO выпилить к хуям
-        /*switch (gameObject.tag)
-        {
-            case "Enemy":
-                alienScore.text = $"{int.Parse(alienScore.text.Split('/')[0]) + 1}/3";
-                break;
-            case "Station":
-                stationScore.text = $"{int.Parse(stationScore.text.Split('/')[0]) + 1}/3";
-                break;
-        }*/
-        Destroy(gameObject);
-        
+    async public void BasicDeath()
+    {
+        score.text = $"{int.Parse(score.text.Split('/')[0]) + 1}/3";
+        enemyDeath.Play();
+        await Task.Delay(400);
+        gameObject.SetActive(false);
     }
     
     private void HealthAdd(float hpAdd)
