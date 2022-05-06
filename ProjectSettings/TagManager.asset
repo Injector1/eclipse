@@ -10,6 +10,7 @@ TagManager:
   - Health&Shield UI
   - UI Canvas
   - Enemy
+  - Utilities
   layers:
   - Default
   - TransparentFX
