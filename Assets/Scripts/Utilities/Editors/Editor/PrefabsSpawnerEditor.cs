@@ -4,23 +4,23 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 
-[CustomEditor(typeof(TemplatesSpawner))]
-public class SpawnerEditor : Editor
+[CustomEditor(typeof(PrefabsSpawner))]
+public class PrefabsSpawnerEditor : Editor
 {
-    private TemplatesSpawner _templatesSpawner;
+    private PrefabsSpawner _prefabsSpawner;
     private List<string> _names;
     private List<GameObject> _gameObjects;
-    
+
     public void OnEnable()
     {
-        _templatesSpawner = (TemplatesSpawner) target;
-        _names = _templatesSpawner.Names;
-        _gameObjects = _templatesSpawner.GameObjects;
+        _prefabsSpawner = (PrefabsSpawner) target;
+        _names = _prefabsSpawner.Names;
+        _gameObjects = _prefabsSpawner.GameObjects;
     }
 
     public override void OnInspectorGUI()
     {
-        _templatesSpawner.SpawnTo = (GameObject) EditorGUILayout.ObjectField(_templatesSpawner.SpawnTo, typeof(GameObject), true);
+        _prefabsSpawner.SpawnTo = (GameObject) EditorGUILayout.ObjectField(_prefabsSpawner.SpawnTo, typeof(GameObject), true);
         for (var i = 0; i < _names.Count; i++)
         {
             EditorGUILayout.BeginVertical("box");
@@ -47,7 +47,7 @@ public class SpawnerEditor : Editor
             _gameObjects.Add(null);
         }
         if (GUI.changed)
-            SetObjectDirty(_templatesSpawner.gameObject);
+            SetObjectDirty(_prefabsSpawner.gameObject);
     }
 
     public static void SetObjectDirty(GameObject obj)

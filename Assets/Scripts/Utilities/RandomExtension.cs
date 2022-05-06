@@ -12,6 +12,11 @@ public class RandomExtensions
 
     public Vector3 GetRandomVector(float length = 1)
     {
-        return Quaternion.Euler(0, 0, (float) _random.NextDouble() * 360) * Vector2.up * length;
+        return Quaternion.Euler(0, 0, GetFloat() * 360) * Vector2.up * length;
+    }
+    
+    public Vector3 GetRandomVector(float minLength, float maxLength)
+    {
+        return GetRandomVector(minLength + GetFloat() * (maxLength - minLength));
     }
 }

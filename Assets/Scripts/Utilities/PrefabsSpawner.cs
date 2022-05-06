@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TemplatesSpawner : MonoBehaviour
+public class PrefabsSpawner : MonoBehaviour
 {
     [SerializeField] public List<string> Names;
     [SerializeField] public List<GameObject> GameObjects;
@@ -14,26 +14,6 @@ public class TemplatesSpawner : MonoBehaviour
         GmObjByName = new Dictionary<string, GameObject>();
         for (var i = 0; i < Names.Count; i++)
             GmObjByName[Names[i]] = GameObjects[i];
-        Check();
-    }
-
-    private void Check()
-    {
-        var spawnRequests = new List<GameObject>();
-        for (var i = 0; i < transform.childCount; i++)
-            spawnRequests.Add(transform.GetChild(i).gameObject);
-
-        foreach (var request in spawnRequests)
-        {
-            var splittedName = request.name.Split('|');
-            var spawnedObjName = splittedName.Length > 1 ? splittedName[1] : splittedName[0]; 
-            var source = GmObjByName[splittedName[0]];
-            var spawnedObj = Instantiate(source, request.transform);
-            spawnedObj.transform.parent = SpawnTo.transform;
-            spawnedObj.SetActive(true);
-            spawnedObj.name = spawnedObjName;
-            Destroy(request);
-        }
     }
 
     /// <summary>

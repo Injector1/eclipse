@@ -11,6 +11,7 @@ public class CinemachineCameraController : MonoBehaviour
     public void Awake()
     {
         _camera = GetComponent<CinemachineVirtualCamera>();
+        _camera.Follow = GameObject.FindWithTag("Player").transform;
     }
 
 
