@@ -14,7 +14,7 @@ public class InterestingGameManager : MonoBehaviour
 
     private void Start()
     {
-        _playerHealth.OnDeath -= _playerHealth.OnDeath;
+        _playerHealth.OnDeath -= _playerHealth.BasicDeath;
         _playerHealth.OnDeath += PlayerDeath;
     }
 

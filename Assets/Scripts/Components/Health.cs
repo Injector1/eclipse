@@ -23,7 +23,7 @@ public class Health : MonoBehaviour
         OnDeath += BasicDeath;
     }
     
-    void BasicDeath()
+    public void BasicDeath()
     {   
         //TODO выпилить к хуям
         /*switch (gameObject.tag)
