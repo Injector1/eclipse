@@ -8,6 +8,7 @@ public class InterestingGameManager : MonoBehaviour
     [SerializeField] public GameObject loseFrame;
     [SerializeField] private AudioSource deathSound;
 
+
     private void Awake()
     {
         _player = GameObject.FindWithTag("Player");
