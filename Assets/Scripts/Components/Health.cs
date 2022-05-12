@@ -23,7 +23,6 @@ public class Health : MonoBehaviour
     {
         await Task.Delay(1000);
         gameObject.SetActive(false);
-        
     }
     
     private void HealthAdd(float hpAdd)
