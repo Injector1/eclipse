@@ -3748,8 +3748,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1891508883}
   m_CullTransparentMesh: 1
-<<<<<<< HEAD
-=======
 --- !u!1 &1892132198 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1452843677005912949, guid: 70447716b75f7354683a20318aca694b, type: 3}
@@ -3851,7 +3849,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
->>>>>>> ec31ebfcf544a23e4202cbfad90d462f5f1936d4
 --- !u!1 &1917815402
 GameObject:
   m_ObjectHideFlags: 0
