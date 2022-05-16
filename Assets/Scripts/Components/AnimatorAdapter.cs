@@ -22,9 +22,16 @@ public class AnimatorAdapter : MonoBehaviour
 
     private void Start()
     {
-        _engine.OnBoost += _ => StartAnimation("isMoving", 100);
-        _weaponController.OnShoot += _ => StartAnimation("isShooting", 100);
         _health.OnDeath += () => { StopAllAnimations(); StartAnimation("isDead"); };
+        try
+        {
+            _engine.OnBoost += _ => StartAnimation("isMoving", 100);
+            _weaponController.OnShoot += _ => StartAnimation("isShooting", 100);
+        }
+        catch (Exception e)
+        {
+            return;
+        }
     }
 
     public void StopAllAnimations()
