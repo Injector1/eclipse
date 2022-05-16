@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 6202384331482572987}
   - component: {fileID: 6202384331482572986}
   - component: {fileID: 6202384331482572965}
+  - component: {fileID: 4369258361230981710}
   m_Layer: 0
   m_Name: Enemy 1
   m_TagString: Enemy
@@ -104,7 +105,7 @@ Animator:
   m_GameObject: {fileID: 3208213613296572647}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 20c8737eeb7ba88488b151b41e01033e, type: 2}
+  m_Controller: {fileID: 9100000, guid: 2fa5f25d76672904f81aa12b6a918d70, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -173,8 +174,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxHealth: 100
-  alienScore: {fileID: 0}
-  stationScore: {fileID: 0}
   CurrentHealth: 1
 --- !u!114 &6202384331482572988
 MonoBehaviour:
@@ -255,6 +254,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bcfc6dd486c34ee28a9be3698178494f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4369258361230981710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3208213613296572647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5dc2fdfd9f7408b9308e1c3e9e5a814, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6202384331311791165
@@ -518,7 +529,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: cae107f2c3e16b542b3c2add87cb7272, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0aacd4ade9a906846b5398fff69b722e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

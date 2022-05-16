@@ -8,6 +8,7 @@ public class PauseMenu : MonoBehaviour
 {
     private static bool IsPaused = false;
     public GameObject pauseMenu;
+    public GameObject loseFrame;
 
     private void Update()
     {
@@ -43,5 +44,12 @@ public class PauseMenu : MonoBehaviour
     {
         ResumeGame();
         SceneManager.LoadScene(0);
+    }
+
+    public void RetryLevel()
+    {
+        Time.timeScale = 1f;
+        loseFrame.SetActive(false);
+        SceneManager.LoadScene(1);
     }
 }
