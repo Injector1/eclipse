@@ -12,6 +12,7 @@ TagManager:
   - Enemy
   - Utilities
   - Station
+  - BackgroundImage
   layers:
   - Default
   - TransparentFX
