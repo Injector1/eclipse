@@ -11,6 +11,8 @@ TagManager:
   - UI Canvas
   - Enemy
   - Utilities
+  - Station
+  - BackgroundImage
   layers:
   - Default
   - TransparentFX
