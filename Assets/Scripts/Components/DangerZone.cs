@@ -36,7 +36,6 @@ public class DangerZone : MonoBehaviour
         var position = player.transform.position;
         var distanceFromCenter = position.x * position.x + position.y * position.y;
 
-        //Debug.Log(distanceFromCenter);
         if (distanceFromCenter < MaxDistance)
         {
             warningFrame.SetActive(false);
