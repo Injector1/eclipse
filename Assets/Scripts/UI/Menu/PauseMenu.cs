@@ -52,11 +52,4 @@ public class PauseMenu : MonoBehaviour
         loseFrame.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
-
-    public void RetryLevel()
-    {
-        Time.timeScale = 1f;
-        loseFrame.SetActive(false);
-        SceneManager.LoadScene(1);
-    }
 }
