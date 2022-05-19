@@ -15,6 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/Episode#1_Dialog.unity
     guid: 3f4b61ec173329a45a86ccec9a29c4c1
   - enabled: 1
-    path: Assets/Scenes/Mission#1_v2.unity
-    guid: 7a176cc2f4d3ada4b932821720225822
+    path: Assets/Scenes/Mission_1_Game.unity
+    guid: 64b6a43b3bc42424ebe3cfad2583bc0b
   m_configObjects: {}

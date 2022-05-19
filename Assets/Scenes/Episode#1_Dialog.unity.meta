@@ -2,8 +2,17 @@ fileFormatVersion: 2
 <<<<<<<< HEAD:Assets/Scenes/Episode#1_Dialog.unity.meta
 guid: 3f4b61ec173329a45a86ccec9a29c4c1
 ========
+<<<<<<< HEAD
 guid: ec30e5438ccbe6b43ae163f99aa1c180
 >>>>>>>> 4e00a1c3e21a1bd80f2ce5ea574a68c70ff3143d:Assets/Scenes/Episode#1.unity.meta
+=======
+<<<<<<<< HEAD:Assets/Scenes/Episode#1_Dialog.unity.meta
+guid: 3f4b61ec173329a45a86ccec9a29c4c1
+========
+guid: ec30e5438ccbe6b43ae163f99aa1c180
+>>>>>>>> 4e00a1c3e21a1bd80f2ce5ea574a68c70ff3143d:Assets/Scenes/Episode#1.unity.meta
+>>>>>>>> 933c894f5ff982cc15715fa9c3c53a889f48d9be:Assets/Scenes/Episode#1.unity.meta
+>>>>>>> 933c894f5ff982cc15715fa9c3c53a889f48d9be
 DefaultImporter:
   externalObjects: {}
   userData: 
