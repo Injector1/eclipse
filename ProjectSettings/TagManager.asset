@@ -4,7 +4,6 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Planet
   - Physical scene
   - Bullets
   - Health&Shield UI
@@ -13,6 +12,7 @@ TagManager:
   - Utilities
   - Station
   - BackgroundImage
+  - Celestial Body
   layers:
   - Default
   - TransparentFX

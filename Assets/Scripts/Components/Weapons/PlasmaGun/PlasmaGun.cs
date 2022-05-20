@@ -7,6 +7,7 @@ public class PlasmaGun : Weapon
 {
     [SerializeField] private float Spreading;
     [SerializeField] private GameObject GameObjectWithBullets;
+    [SerializeField] private float BulletSpeed;
 
     private WeaponController _weaponController;
     private CoolDown _coolDown;
@@ -38,5 +39,7 @@ public class PlasmaGun : Weapon
         
         newBullet.transform.parent = GameObjectWithBullets.transform;
         newBullet.SetActive(true);
+        newBullet.GetComponent<Rigidbody2D>().velocity = (GetComponentInParent<Rigidbody2D>()?.velocity ?? Vector2.zero) +
+                (Vector2)(BulletSpeed * (transform.rotation * Vector2.up));
     }
 }

@@ -126,7 +126,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 0.001
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 0
@@ -187,7 +187,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec2d1b2e221a448b84059d161a546ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DamageResist: 1
   PhysDamageMultiplier: 1
 --- !u!114 &6202384331482572991
 MonoBehaviour:
@@ -213,7 +212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0ec49e245469d54e873ea29aa9f4211, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidbody: {fileID: 0}
+  IsOnOrbit: 0
 --- !u!114 &6202384331482572987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,7 +225,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec2d1b2e221a448b84059d161a546ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DamageResist: 1
   PhysDamageMultiplier: 1
 --- !u!114 &6202384331482572986
 MonoBehaviour:
@@ -241,7 +239,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxSpeedSqr: 100
-  Power: 0.1
+  Power: 0.0002
   Maneuverability: 4.5
   OnRotateSlowDown: 2
 --- !u!114 &6202384331482572965
@@ -553,7 +551,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   LifeTime: 5
-  Speed: 10
 --- !u!70 &6202384331661006553
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -651,6 +648,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Spreading: 10
   GameObjectWithBullets: {fileID: 0}
+  BulletSpeed: 10
 --- !u!114 &6202384332338127393
 MonoBehaviour:
   m_ObjectHideFlags: 0

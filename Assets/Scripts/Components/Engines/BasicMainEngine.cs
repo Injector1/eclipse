@@ -34,7 +34,7 @@ public class BasicMainEngine : Engine
     
     private void SlowDown(float axis)
     {
-        _rigidbody.AddForce(axis * _rigidbody.velocity);
+        _rigidbody.AddForce(axis * _rigidbody.velocity * _rigidbody.mass);
     }
 
     private void Boost(float axis)

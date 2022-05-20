@@ -8,7 +8,7 @@ public class CollisionHandler : MonoBehaviour
 {
     private Rigidbody2D _rigidbody;
     private Health _health;
-    [SerializeField] private float DamageResist = 1;
+    //[SerializeField] private float DamageResist = 1;
     [SerializeField] private float PhysDamageMultiplier = 1;
 
     private void Awake()
@@ -41,7 +41,9 @@ public class CollisionHandler : MonoBehaviour
             return;
         var mass = _rigidbody.bodyType == RigidbodyType2D.Dynamic ? _rigidbody.mass : 1;
         var massOther = rbOther.bodyType == RigidbodyType2D.Dynamic ? rbOther.mass : 0;
-        var sqrSpeed = collision.relativeVelocity.sqrMagnitude;
+        var sqrSpeed = collision.otherCollider.TryGetComponent<OrbitingBody>(out var orbitingBody)
+                ? (_rigidbody.velocity - orbitingBody.GetVelocity()).sqrMagnitude
+                : collision.relativeVelocity.sqrMagnitude;
         var damage = PhysDamageMultiplier * (sqrSpeed > 0.5f ? sqrSpeed : 0) * massOther / (mass + massOther);
         _health.OnHealthChange?.Invoke(-damage);
     }
