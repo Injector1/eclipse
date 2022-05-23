@@ -28,6 +28,6 @@ public class HealthBar : MonoBehaviour
 
     private void ChangeBarRotation()
     {
-        _healthBar.transform.localEulerAngles = new Vector3(0, 0, -135 + 90 * _health.CurrentHealth / _health.MaxHealth);
+        _healthBar.transform.localEulerAngles = new Vector3(0, 0, -135 + 90 * _health.currentHealth / _health.maxHealth);
     }
 }
