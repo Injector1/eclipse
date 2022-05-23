@@ -28,7 +28,7 @@ public class AnimatorAdapter : MonoBehaviour
             _engine.OnBoost += _ => StartAnimation("isMoving", 100);
             _weaponController.OnShoot += _ => StartAnimation("isShooting", 100);
         }
-        catch (Exception e)
+        catch (Exception)
         {
             return;
         }

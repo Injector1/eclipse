@@ -1,41 +1,46 @@
 using System;
 using System.Threading.Tasks;
 using UnityEngine;
+using static GunModifier;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] public float MaxHealth = 100;
-    public float CurrentHealth;
+    [SerializeField] public float maxHealth = 100;
+    public float currentHealth;
     public Action<float> OnHealthChange;
     public Action OnDeath;
     
-
+    [SerializeField] GameObject player;
+    private GunModifier _playerGun;
+    
     private void Awake()
     {
-        CurrentHealth = MaxHealth;
+        currentHealth = maxHealth;
         OnHealthChange += HealthAdd;
         OnDeath += BasicDeath;
+        if (gameObject.CompareTag("Enemy")) _playerGun = player.GetComponent<GunModifier>();
     }
     
-    async public void BasicDeath()
+    public async void BasicDeath()
     {
+        if (gameObject.CompareTag("Enemy")) _playerGun.ImproveGun();
         await Task.Delay(1000);
         gameObject.SetActive(false);
     }
     
     private void HealthAdd(float hpAdd)
     {
-        CurrentHealth += hpAdd;
-        if (CurrentHealth <= 0)
+        currentHealth += hpAdd;
+        if (currentHealth <= 0)
         {
-            CurrentHealth = 0;
+            currentHealth = 0;
             OnHealthChange = null;
             OnDeath?.Invoke();
             return;
         }
-        if (CurrentHealth > MaxHealth)
-            CurrentHealth = MaxHealth;
+        if (currentHealth > maxHealth)
+            currentHealth = maxHealth;
     }
 }

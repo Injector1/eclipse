@@ -48,7 +48,14 @@ public class PlayerController : MonoBehaviour
         if (mousePosition.IsUpdated)
         {
             var lookVector = mousePosition.Value - Camera.main.WorldToScreenPoint(transform.position);
-            _weaponController?.OnShoot?.Invoke(lookVector);
+            try
+            {
+                _weaponController?.OnShoot?.Invoke(lookVector);
+            }
+            catch (Exception)
+            {
+                return;
+            }
         }
 
         if (horizontalAxis.IsUpdated) 
