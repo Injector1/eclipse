@@ -37,7 +37,13 @@ public class GunModifier : MonoBehaviour
         await Task.Delay(300);
         successSound.Play();
         Debug.Log($"Improved to new gun {guns[i].name}");
-        guns[i - 1].SetActive(false);
+        
+        DisableGun(guns[i - 1]);
         guns[i].SetActive(true);
+    }
+
+    private static void DisableGun(GameObject oldGun)
+    {
+        Destroy(oldGun);
     }
 }

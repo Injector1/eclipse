@@ -1093,6 +1093,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 488195785}
     m_Modifications:
+    - target: {fileID: 139053155304887397, guid: 70447716b75f7354683a20318aca694b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1141226960987791015, guid: 70447716b75f7354683a20318aca694b, type: 3}
       propertyPath: RawDamage
       value: 12000
@@ -1100,6 +1104,18 @@ PrefabInstance:
     - target: {fileID: 1452843677005912949, guid: 70447716b75f7354683a20318aca694b, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1591208080618517174, guid: 70447716b75f7354683a20318aca694b, type: 3}
+      propertyPath: m_Name
+      value: RocketLauncherGun
+      objectReference: {fileID: 0}
+    - target: {fileID: 5663735449419952475, guid: 70447716b75f7354683a20318aca694b, type: 3}
+      propertyPath: m_Name
+      value: LaserGun
+      objectReference: {fileID: 0}
+    - target: {fileID: 6510401482763594196, guid: 70447716b75f7354683a20318aca694b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6654846615119477330, guid: 70447716b75f7354683a20318aca694b, type: 3}
       propertyPath: Loop
@@ -1153,9 +1169,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7559096860938968237, guid: 70447716b75f7354683a20318aca694b, type: 3}
+      propertyPath: m_Name
+      value: Semi-autoGun
+      objectReference: {fileID: 0}
     - target: {fileID: 7980131530714619733, guid: 70447716b75f7354683a20318aca694b, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7980131530714619734, guid: 70447716b75f7354683a20318aca694b, type: 3}
+      propertyPath: m_Name
+      value: ClassicGun
       objectReference: {fileID: 0}
     - target: {fileID: 7980131531701237857, guid: 70447716b75f7354683a20318aca694b, type: 3}
       propertyPath: m_LocalScale.x
@@ -1168,6 +1192,10 @@ PrefabInstance:
     - target: {fileID: 7980131531701237857, guid: 70447716b75f7354683a20318aca694b, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7993092659465097453, guid: 70447716b75f7354683a20318aca694b, type: 3}
+      propertyPath: m_Name
+      value: Classic+Gun
       objectReference: {fileID: 0}
     - target: {fileID: 7994410136155745400, guid: 70447716b75f7354683a20318aca694b, type: 3}
       propertyPath: soundNames.Array.size
