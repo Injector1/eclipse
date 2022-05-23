@@ -3348,8 +3348,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec2d1b2e221a448b84059d161a546ea3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DamageResist: 0
-  PhysDamageMultiplier: 0
+  DamageResist: 1
+  PhysDamageMultiplier: 1
 --- !u!114 &1154318840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3375,8 +3375,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c2d91c0e8d947c38a202271f1097f9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 3
-  CurrentHealth: 3
+  MaxHealth: 3000
+  CurrentHealth: 3000
 --- !u!68 &1154318842
 EdgeCollider2D:
   m_ObjectHideFlags: 0
