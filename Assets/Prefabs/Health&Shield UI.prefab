@@ -50,6 +50,7 @@ GameObject:
   - component: {fileID: 2923339224612671733}
   - component: {fileID: 8645566557560708980}
   - component: {fileID: 9159275253801380350}
+  - component: {fileID: 4530717608667853364}
   m_Layer: 5
   m_Name: Health&Shield UI
   m_TagString: Untagged
@@ -149,6 +150,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f0c5fdeb28154a65b8a42b3a5627e58c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4530717608667853364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1489686349845909266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82e50035c39d4e9e9778bb846c8da240, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3820524938081224453

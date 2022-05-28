@@ -6,15 +6,17 @@ using UnityEngine.UI;
 
 public class Health : MonoBehaviour
 {
-    [SerializeField] public float MaxHealth = 100;
-    public float CurrentHealth;
+    [SerializeField] public float MaxHealth;
+    [SerializeField] public float CurrentHealth;
     public Action<float> OnHealthChange;
     public Action OnDeath;
-    
+    private Shield _shield;
+
 
     private void Awake()
     {
-        CurrentHealth = MaxHealth;
+        _shield = GetComponent<Shield>();
+        CurrentHealth = CurrentHealth == 0 ? MaxHealth : CurrentHealth;
         OnHealthChange += HealthAdd;
         OnDeath += BasicDeath;
     }
@@ -39,6 +41,8 @@ public class Health : MonoBehaviour
 
     private void DecreaseHealth(float hpDecrease)
     {
+        if (_shield != null)
+            hpDecrease = _shield.TakeDamage(hpDecrease);
         CurrentHealth -= hpDecrease;
         if (CurrentHealth > 0) return;
         

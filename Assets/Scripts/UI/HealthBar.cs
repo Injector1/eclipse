@@ -17,7 +17,6 @@ public class HealthBar : MonoBehaviour
     {
         _health.OnHealthChange += _ => ChangeBarRotation();
         _health.OnDeath += ChangeBarRotation;
-        _healthBar = transform.GetChild(0).GetChild(0).GetChild(0).gameObject;
     }
 
     private void Update()
