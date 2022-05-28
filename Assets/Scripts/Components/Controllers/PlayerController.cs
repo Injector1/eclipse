@@ -2,7 +2,7 @@
 using UnityEngine;
 
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IController
 {
     private Engine _engine;
     private Health _health;
@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     private SavedInput<float> horizontalAxis;
     private SavedInput<float> verticalAxis;
     private SavedInput<Vector3> mousePosition;
-    public bool IsDisabled;
+    public bool IsDisabled { get; set; }
 
     public void Awake()
     {
@@ -29,6 +29,9 @@ public class PlayerController : MonoBehaviour
 
     public void Update()
     {
+        if (IsDisabled)
+            return;
+        
         if (Input.GetButton("Fire1"))
             mousePosition.Value = Input.mousePosition;
 

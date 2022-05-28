@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine;
 
 
-public class BotEnemyController : MonoBehaviour
+public class BotEnemyController : MonoBehaviour, IController
 {
     private Engine _engine;
     private Health _health;
@@ -11,6 +11,7 @@ public class BotEnemyController : MonoBehaviour
     private Rigidbody2D _rigidbody;
     private GameObject _player;
     private Rigidbody2D _playerRigidbody;
+    public bool IsDisabled { get; set; }
 
     private void Awake()
     {
@@ -28,6 +29,9 @@ public class BotEnemyController : MonoBehaviour
     
     public void FixedUpdate()
     {
+        if (IsDisabled)
+            return;
+        
         var playerPosition = _playerRigidbody.position;
         var spaceshipPosition = _rigidbody.position;
         var toPlayer = playerPosition - spaceshipPosition;

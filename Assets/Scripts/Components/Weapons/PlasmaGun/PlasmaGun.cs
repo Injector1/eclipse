@@ -40,6 +40,6 @@ public class PlasmaGun : Weapon
         newBullet.transform.parent = GameObjectWithBullets.transform;
         newBullet.SetActive(true);
         newBullet.GetComponent<Rigidbody2D>().velocity = (GetComponentInParent<Rigidbody2D>()?.velocity ?? Vector2.zero) +
-                (Vector2)(BulletSpeed * (transform.rotation * Vector2.up));
+                (Vector2)(BulletSpeed * (newBullet.transform.rotation * Vector2.up));
     }
 }

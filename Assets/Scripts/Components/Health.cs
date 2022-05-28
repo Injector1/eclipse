@@ -19,8 +19,11 @@ public class Health : MonoBehaviour
         OnDeath += BasicDeath;
     }
     
-    async public void BasicDeath()
+    public async void BasicDeath()
     {
+        if (TryGetComponent(typeof(IController), out var controller))
+            ((IController) controller).IsDisabled = true;
+
         await Task.Delay(1000);
         gameObject.SetActive(false);
     }

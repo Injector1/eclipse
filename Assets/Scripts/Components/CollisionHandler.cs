@@ -8,7 +8,6 @@ public class CollisionHandler : MonoBehaviour
 {
     private Rigidbody2D _rigidbody;
     private Health _health;
-    //[SerializeField] private float DamageResist = 1;
     [SerializeField] private float PhysDamageMultiplier = 1;
 
     private void Awake()
