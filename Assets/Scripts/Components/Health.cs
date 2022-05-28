@@ -30,15 +30,20 @@ public class Health : MonoBehaviour
     
     private void HealthAdd(float hpAdd)
     {
-        CurrentHealth += hpAdd;
-        if (CurrentHealth <= 0)
-        {
-            CurrentHealth = 0;
-            OnHealthChange = null;
-            OnDeath?.Invoke();
-            return;
-        }
-        if (CurrentHealth > MaxHealth)
+        if (hpAdd < 0)
+            DecreaseHealth(-hpAdd);
+        
+        else if (CurrentHealth > MaxHealth)
             CurrentHealth = MaxHealth;
+    }
+
+    private void DecreaseHealth(float hpDecrease)
+    {
+        CurrentHealth -= hpDecrease;
+        if (CurrentHealth > 0) return;
+        
+        CurrentHealth = 0;
+        OnHealthChange = null;
+        OnDeath?.Invoke();
     }
 }
