@@ -21,29 +21,28 @@ public class Health : MonoBehaviour
         OnDeath += BasicDeath;
     }
     
-    public async void BasicDeath()
+    public void BasicDeath()
     {
         if (TryGetComponent(typeof(IController), out var controller))
             ((IController) controller).IsDisabled = true;
-
-        await Task.Delay(1000);
-        gameObject.SetActive(false);
+        
+        ActionPlanner.PostponeAnAction(() => gameObject.SetActive(false), 1000);
     }
     
     private void HealthAdd(float hpAdd)
     {
         if (hpAdd < 0)
-            DecreaseHealth(-hpAdd);
+            TakeDamage(-hpAdd);
         
         else if (CurrentHealth > MaxHealth)
             CurrentHealth = MaxHealth;
     }
 
-    private void DecreaseHealth(float hpDecrease)
+    private void TakeDamage(float damage)
     {
         if (_shield != null)
-            hpDecrease = _shield.TakeDamage(hpDecrease);
-        CurrentHealth -= hpDecrease;
+            damage = _shield.TakeDamage(damage);
+        CurrentHealth -= damage;
         if (CurrentHealth > 0) return;
         
         CurrentHealth = 0;

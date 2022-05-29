@@ -19,20 +19,9 @@ public class CollisionHandler : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        var otherObject = collision.gameObject;
-        var damageBody = collision.gameObject.GetComponent<DamageBody>();
-        if (damageBody is null)
-            TakePhysicalDamage(collision);
-        else
-            HandleCollision(otherObject);
+        TakePhysicalDamage(collision);
     }
-
-    public void HandleCollision(GameObject otherObject)
-    {
-        var damageBody = otherObject.GetComponent<DamageBody>();
-        _health.OnHealthChange?.Invoke(-damageBody.GetDamage());
-    }
-
+    
     void TakePhysicalDamage(Collision2D collision)
     {
         var rbOther = collision.gameObject.GetComponent<Rigidbody2D>();

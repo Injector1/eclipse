@@ -13,7 +13,7 @@ public class CoolDown : MonoBehaviour
         if (isCoolDown)
             return false;
         isCoolDown = true;
-        EventPlanner.PostponeAnEvent(() => isCoolDown = false, CoolDownInMs);
+        ActionPlanner.PostponeAnAction(() => isCoolDown = false, CoolDownInMs);
         return true;
     }
 }

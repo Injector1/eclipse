@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections;
 using System.Threading.Tasks;
 using UnityEngine;
 
-public static class EventPlanner
+public static class ActionPlanner
 {
-    public static async void PostponeAnEvent(Action action, int delay, bool ignoreNullableException = true)
+    public static async void PostponeAnAction(Action action, int delay, bool ignoreNullableException = true)
     {
         await Task.Delay(delay);
         if (!ignoreNullableException)

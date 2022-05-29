@@ -65,6 +65,6 @@ public class Shield : MonoBehaviour
         if (CurrentShield < MaxShield  && (DateTime.Now - _lastDamageTaken).TotalSeconds >= SecondsWithoutDamageToRegen)
             ShieldAdd(_regenPerTick);
         if (!_regenStopFlag)
-            EventPlanner.PostponeAnEvent(Regen, _tickInMS);
+            ActionPlanner.PostponeAnAction(Regen, _tickInMS);
     }
 }

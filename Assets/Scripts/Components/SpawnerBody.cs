@@ -27,6 +27,6 @@ public class SpawnerBody : MonoBehaviour
     {
         //TODO: сделать, чтобы при уничтожении спавнера он переставал спавнить
         _spawner.Spawn("Enemy", transform.position + _random.GetRandomVector(MinSpawnRadius, MaxSpawnRadius), _random.GetFloat());
-        EventPlanner.PostponeAnEvent(Spawn, (int) (SpawnDelay + 2 * (_random.GetFloat() - 0.5f) * DelayDeviation * SpawnDelay));
+        ActionPlanner.PostponeAnAction(Spawn, (int) (SpawnDelay + 2 * (_random.GetFloat() - 0.5f) * DelayDeviation * SpawnDelay));
     }
 }

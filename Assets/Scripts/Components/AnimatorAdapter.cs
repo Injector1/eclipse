@@ -43,7 +43,7 @@ public class AnimatorAdapter : MonoBehaviour
     public void StartAnimation(string state, int durationInMs)
     {
         StartAnimation(state);
-        EventPlanner.PostponeAnEvent(() =>
+        ActionPlanner.PostponeAnAction(() =>
         {
             if (LastUpdated[state].AddMilliseconds(durationInMs) <= DateTime.Now)
                 StopAnimation(state);
