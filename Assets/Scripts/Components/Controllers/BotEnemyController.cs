@@ -33,15 +33,27 @@ public class BotEnemyController : MonoBehaviour
         var toPlayer = playerPosition - spaceshipPosition;
         var lookVector = transform.rotation * Vector2.up;
         _engine.OnRotate?.Invoke(GetRotationValue(lookVector, toPlayer));
-        if (toPlayer.magnitude < 5)
-        {
-            _engine.OnBoost?.Invoke(0.5f);
-            _weaponController.OnShoot?.Invoke(toPlayer);
-        }
+        var distance = toPlayer.magnitude;
+        if (distance > 25) 
+            return;
+        Boost(distance);
+        Shoot(distance, toPlayer);
+    }
+
+    private void Boost(float distance)
+    {
+        if (distance > 9)
+            _engine.OnBoost?.Invoke(1f);
+        else if (distance > 5)
+            _engine.OnBoost?.Invoke(0.55f);
         else
-        {
-            _engine.OnBoost?.Invoke(1);
-        }
+            _engine.OnBoost?.Invoke(-0.35f);
+    }
+
+    private void Shoot(float distance, Vector2 toTarget)
+    {
+        if (2 < distance && distance < 8)
+            _weaponController.OnShoot?.Invoke(toTarget);
     }
     
     private float GetRotationValue(Vector2 lookVector, Vector2 toObject)
