@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using System.Threading.Tasks;
+using Components;
 using Random = System.Random;
 
 public class PlasmaGun : Weapon
