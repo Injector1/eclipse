@@ -1,28 +1,45 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace Utilities
 {
+    public class Dialog
+    {
+        public readonly string Text;
+        public readonly int PersonIndex;
+        public readonly int TextSpeed;
+        
+        public Dialog(string t, int i, int tS)
+        {
+            Text = t;
+            PersonIndex = i;
+            TextSpeed = tS;
+        }    
+    }
+    
     public class InGameDialog : MonoBehaviour
     {
         [SerializeField] private GameObject dialogFrame;
         [SerializeField] private GameObject[] speakers;
         [SerializeField] private Text dialogText;
         [SerializeField] private AudioSource typingSound;
-        
-        private int _frameIndex;
+
+        private List<Dialog> _dialogues;
+        private int _dialogIndex;
+        private bool _isPlaying;
+
         private string[] _text;
         private float _textSpeed;
-        private float _breakTime;
         private int _nowSpeaking;
-        private bool _isDialogPlaying;
+        
+        private int _frameIndex;
+        private const float BreakTime = 10000;
 
         void Update()
         {
-            if (!_isDialogPlaying) return;
-            if (!Input.anyKeyDown) return;
+            if (!_isPlaying || !Input.anyKeyDown) return;
             
             if (dialogText.text == _text[_frameIndex].Replace("#", string.Empty))
             {
@@ -35,20 +52,17 @@ namespace Utilities
                 dialogText.text = _text[_frameIndex].Replace("#", string.Empty);
             }
         }
-        
-        public void StartDialog(string text, int personIndex, float textSpeed)
+
+        public void StartDialog(List<Dialog> dialogues)
         {
-            dialogText.text = string.Empty;
-            _frameIndex = 0;
-            _breakTime = 10000;
-            _nowSpeaking = personIndex;
-            _text = text.Split('&');
-            _textSpeed = textSpeed * 50000;
+            _dialogues = dialogues;
+            _dialogIndex = 0;
             
+            ChangeSpeaker(0);
             PrepareScene(true);
             StartCoroutine(TypeLine());
         }
-    
+
         IEnumerator TypeLine()
         {
             TurnExtensions(true);
@@ -56,7 +70,7 @@ namespace Utilities
             foreach(char c in _text[_frameIndex])
             {
                 if (c != '#') dialogText.text += c;
-                yield return new WaitForSeconds(c == '#' ? 1 / _breakTime : 1 / _textSpeed);
+                yield return new WaitForSeconds(c == '#' ? 1 / BreakTime : 1 / _textSpeed);
             }
             TurnExtensions(false);
         }
@@ -71,7 +85,13 @@ namespace Utilities
             }
             else
             {
-                PrepareScene(false);
+                if (_dialogIndex + 1 < _dialogues.Count)
+                {
+                    _dialogIndex += 1;
+                    ChangeSpeaker(_dialogIndex);
+                    StartCoroutine(TypeLine());
+                }
+                else PrepareScene(false);
             }
         }
     
@@ -86,7 +106,18 @@ namespace Utilities
             Time.timeScale = turned ? 0.0001f : 1f;
             dialogFrame.SetActive(turned);
             speakers[_nowSpeaking].SetActive(turned);
-            _isDialogPlaying = turned;
+            _isPlaying = turned;
+        }
+
+        private void ChangeSpeaker(int i)
+        {
+            dialogText.text = string.Empty;
+            _frameIndex = 0;
+            speakers[_nowSpeaking].SetActive(false);
+            _nowSpeaking = _dialogues[i].PersonIndex;
+            speakers[_nowSpeaking].SetActive(true);
+            _text = _dialogues[i].Text.Split('&');
+            _textSpeed = _dialogues[i].TextSpeed * 50000;
         }
     }
 }

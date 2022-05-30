@@ -7235,6 +7235,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7451608137330297681, guid: ad80ef65de41e124bbeb3481568d7874, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7451608137330297681, guid: ad80ef65de41e124bbeb3481568d7874, type: 3}
       propertyPath: m_LocalPosition.x
       value: -48.8
       objectReference: {fileID: 0}
@@ -7274,13 +7278,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7451608137330297684, guid: ad80ef65de41e124bbeb3481568d7874, type: 3}
+      propertyPath: m_Interpolate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7451608137330297685, guid: ad80ef65de41e124bbeb3481568d7874, type: 3}
+      propertyPath: m_EdgeRadius
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7451608137330297685, guid: ad80ef65de41e124bbeb3481568d7874, type: 3}
+      propertyPath: m_UseAdjacentEndPoint
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7451608137330297685, guid: ad80ef65de41e124bbeb3481568d7874, type: 3}
+      propertyPath: m_UseAdjacentStartPoint
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7451608137330297686, guid: ad80ef65de41e124bbeb3481568d7874, type: 3}
       propertyPath: MaxHealth
-      value: 3
+      value: 3000
       objectReference: {fileID: 0}
     - target: {fileID: 7451608137330297686, guid: ad80ef65de41e124bbeb3481568d7874, type: 3}
       propertyPath: CurrentHealth
-      value: 3
+      value: 3000
       objectReference: {fileID: 0}
     - target: {fileID: 7451608137330297690, guid: ad80ef65de41e124bbeb3481568d7874, type: 3}
       propertyPath: EntityToSpawn
