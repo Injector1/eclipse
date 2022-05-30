@@ -20,7 +20,7 @@ public class BackgroundGenerator : MonoBehaviour
 
     void Update()
     {
-        foreach (var newPosition in CreatePositions(_observer.GetPlayerPosition()))
+        foreach (var newPosition in CreatePositions(_observer.Player.transform.position))
         {
             if (!_backgroundPositions.Contains(newPosition))
             {

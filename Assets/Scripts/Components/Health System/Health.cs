@@ -23,8 +23,8 @@ public class Health : MonoBehaviour
     
     public void BasicDeath()
     {
-        if (TryGetComponent(typeof(IController), out var controller))
-            ((IController) controller).IsDisabled = true;
+        if (TryGetComponent<IController>(out var controller))
+            controller.IsDisabled = true;
         
         ActionPlanner.PostponeAnAction(() => gameObject.SetActive(false), 1000);
     }

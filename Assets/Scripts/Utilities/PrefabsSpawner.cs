@@ -8,6 +8,7 @@ public class PrefabsSpawner : MonoBehaviour
     [SerializeField] public List<GameObject> GameObjects;
     [SerializeField] public GameObject SpawnTo;
     public Dictionary<string, GameObject> GmObjByName;
+    public event Action<GameObject> OnEntitySpawn;
 
     private void Awake()
     {
@@ -32,6 +33,7 @@ public class PrefabsSpawner : MonoBehaviour
         spawnedObj.transform.eulerAngles = new Vector3(0, 0, rotation);
         spawnedObj.SetActive(true);
         spawnedObj.name = spawnedObjName;
+        OnEntitySpawn?.Invoke(spawnedObj);
     }
     
     /// <summary>
@@ -41,13 +43,7 @@ public class PrefabsSpawner : MonoBehaviour
     /// <param name="position">поцизия спавна</param>
     public void Spawn(string templateName, Vector3 position)
     {
-        var splittedName = templateName.Split('|');
-        var spawnedObjName = splittedName.Length > 1 ? splittedName[1] : splittedName[0]; 
-        var source = GmObjByName[splittedName[0]];
-        var spawnedObj = Instantiate(source, SpawnTo.transform, true);
-        spawnedObj.transform.position = position;
-        spawnedObj.SetActive(true);
-        spawnedObj.name = spawnedObjName;
+        Spawn(templateName, position, 0);
     }
     
     /// <summary>
@@ -56,11 +52,6 @@ public class PrefabsSpawner : MonoBehaviour
     /// <param name="templateName">в формате "название шаблона" или "название шаблона|название заспавненного объекта"</param>
     public void Spawn(string templateName)
     {
-        var splittedName = templateName.Split('|');
-        var spawnedObjName = splittedName.Length > 1 ? splittedName[1] : splittedName[0]; 
-        var source = GmObjByName[splittedName[0]];
-        var spawnedObj = Instantiate(source, SpawnTo.transform, true);
-        spawnedObj.SetActive(true);
-        spawnedObj.name = spawnedObjName;
+        Spawn(templateName, Vector3.zero, 0);
     }
 }

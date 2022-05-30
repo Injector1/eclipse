@@ -1,81 +1,81 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class GameObserver : MonoBehaviour
 {
-    [SerializeField] private GameObject player;
-    [SerializeField] private GameObject winFrame;
-    [SerializeField] private int secondsToGetMaxRating;
-    [SerializeField] private int secondsToGetMediumRating;
+    public DateTime GameStartTime;
+    public int EnemyKillsCount;
+    public int StationKillsCount;
 
-    private float _gameStartTime;
-    private bool _isGameEnded;
+    public HashSet<GameObject> Enemies;
+    public HashSet<GameObject> Stations;
+    public GameObject Player;
 
-    private Vector3 _playerPosition;
-
-    private int _enemyCount;
-    private int _killsCount;
-
-    private int _stationCount;
+    public event Action<GameObject> OnEntityDeath;
 
     private void Start()
     {
-        _playerPosition = new Vector3();
-        _enemyCount = 0;
-        _killsCount = 0;
-        _stationCount = GameObject.FindGameObjectsWithTag("Station").Length;;
-        _gameStartTime = Time.time;
-        _isGameEnded = false;
-    }
-
-    void Update()
-    {
-        UpdatePlayerPosition();
-        UpdateEnemyCount();
-        UpdateStationCount();
-    }
-
-    private void UpdatePlayerPosition()
-    {
-        _playerPosition = player.transform.position;
-    }
-
-    private void UpdateEnemyCount()
-    {
-        var n = GameObject.FindGameObjectsWithTag("Enemy").Length;
-        if (n > _enemyCount) _enemyCount = n;
-        else if (n < _enemyCount) { _enemyCount = n; _killsCount++; }
-    }
-
-    private void UpdateStationCount()
-    {
-        var n = GameObject.FindGameObjectsWithTag("Station").Length;
-        if (n < _stationCount) { _stationCount = n; }
-
-        if (_stationCount == 0 && !_isGameEnded) winFrame.GetComponent<CheckForWin>().GetEpisodeResult(
-            GetRating(),
-            Time.time - _gameStartTime);
-    }
-
-    private int GetRating()
-    {
-        _isGameEnded = true;
-
-        var gameTime = Time.time - _gameStartTime;
+        EnemyKillsCount = 0;
+        StationKillsCount = 0;
+        Stations = new HashSet<GameObject>(GameObject.FindGameObjectsWithTag("Station"));
+        Enemies = new HashSet<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
+        Player = GameObject.FindWithTag("Player");
+        GameStartTime = DateTime.Now;
         
-        if (gameTime < secondsToGetMaxRating)
-            return 3;
-        return gameTime < secondsToGetMediumRating 
-            ? 2 
-            : 1;
+        var spawner = GameObject.FindWithTag("Utilities").GetComponent<PrefabsSpawner>();
+        spawner.OnEntitySpawn += e =>
+        {
+            AddEntityToObserver(e);
+            if (e.TryGetComponent<Health>(out var health))
+                health.OnDeath += () => RemoveEntityFromObserver(e);
+        };
+
+        foreach (var entity in Enemies.Concat(Stations))
+            if (entity.TryGetComponent<Health>(out var health))
+                health.OnDeath += () => HandleEntityDeath(entity);
+        
     }
 
-    public Vector3 GetPlayerPosition()
+    private void HandleEntityDeath(GameObject entity)
     {
-        return _playerPosition;
+        if (entity.TryGetComponent<Health>(out _))
+            RemoveEntityFromObserver(entity);
+        OnEntityDeath?.Invoke(entity);
     }
-
-    public int GetKillsCount()
+    
+    private void AddEntityToObserver(GameObject entity)
     {
-        return _killsCount;
+        switch (entity.tag)
+        {
+            case "Enemy":
+                Enemies.Add(entity);
+                break;
+            case "Station":
+                Stations.Add(entity);
+                break;
+            case "Player":
+                Player = entity;
+                break;
+        }
+    }
+    
+    private void RemoveEntityFromObserver(GameObject entity)
+    {
+        switch (entity.tag)
+        {
+            case "Enemy":
+                Enemies.Remove(entity);
+                EnemyKillsCount++;
+                break;
+            case "Station":
+                Stations.Remove(entity);
+                StationKillsCount++;
+                break;
+            case "Player":
+                Player = null;
+                break;
+        }
     }
 }
