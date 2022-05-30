@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 
 public class BackgroundGenerator : MonoBehaviour
 {
-    [SerializeField] private GameObject player;
+    private GameObserver _observer;
     private PrefabsSpawner _spawner;
     private List<Vector3> _backgroundPositions;
     private const int BackgroundSize = 30;
@@ -15,13 +15,12 @@ public class BackgroundGenerator : MonoBehaviour
     {
         _backgroundPositions = new List<Vector3>();
         _spawner = GameObject.FindWithTag("Utilities").GetComponent<PrefabsSpawner>();
+        _observer = GameObject.FindWithTag("Utilities").GetComponent<GameObserver>();
     }
 
     void Update()
     {
-        var position = player.transform.position;
-        
-        foreach (var newPosition in CreatePositions((int) Math.Round(position.x), (int) Math.Round(position.y)))
+        foreach (var newPosition in CreatePositions(_observer.GetPlayerPosition()))
         {
             if (!_backgroundPositions.Contains(newPosition))
             {
@@ -31,12 +30,15 @@ public class BackgroundGenerator : MonoBehaviour
         }
     }
 
-    private static IEnumerable<Vector3> CreatePositions(int x0, int y0)
+    private static IEnumerable<Vector3> CreatePositions(Vector3 position)
     {
         for (int k1 = -1; k1 < 2; k1++)
             for (int k2 = -1; k2 < 2; k2++)
             {
-                var (x, y) = CreateCoords(x0, y0, k1, k2);
+                var (x, y) = CreateCoords(
+                    (int)Math.Round(position.x),
+                    (int) Math.Round(position.y),
+                    k1, k2);
                 yield return new Vector3(x, y, 500);
             }
     }
