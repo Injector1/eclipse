@@ -29,7 +29,7 @@ public class GameObserver : MonoBehaviour
         {
             AddEntityToObserver(e);
             if (e.TryGetComponent<Health>(out var health))
-                health.OnDeath += () => RemoveEntityFromObserver(e);
+                health.OnDeath += () => HandleEntityDeath(e);
         };
 
         foreach (var entity in Enemies.Concat(Stations))
@@ -40,8 +40,7 @@ public class GameObserver : MonoBehaviour
 
     private void HandleEntityDeath(GameObject entity)
     {
-        if (entity.TryGetComponent<Health>(out _))
-            RemoveEntityFromObserver(entity);
+        RemoveEntityFromObserver(entity);
         OnEntityDeath?.Invoke(entity);
     }
     

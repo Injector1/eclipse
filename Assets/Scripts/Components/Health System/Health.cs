@@ -11,11 +11,13 @@ public class Health : MonoBehaviour
     public Action<float> OnHealthChange;
     public Action OnDeath;
     private Shield _shield;
+    public bool IsAlive;
 
 
     private void Awake()
     {
         _shield = GetComponent<Shield>();
+        IsAlive = true;
         CurrentHealth = CurrentHealth == 0 ? MaxHealth : CurrentHealth;
         OnHealthChange += HealthAdd;
         OnDeath += BasicDeath;
@@ -25,7 +27,7 @@ public class Health : MonoBehaviour
     {
         if (TryGetComponent<IController>(out var controller))
             controller.IsDisabled = true;
-        
+        IsAlive = false;
         ActionPlanner.PostponeAnAction(() => gameObject.SetActive(false), 1000);
     }
     

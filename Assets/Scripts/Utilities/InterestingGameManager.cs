@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Utilities;
 
 public class InterestingGameManager : MonoBehaviour
 {
@@ -36,6 +37,7 @@ public class InterestingGameManager : MonoBehaviour
     
     private void CheckStationCount()
     {
+        GameObject.FindWithTag("Utilities").GetComponent<InGameDialog>().StartDialog("как же я ненавижу чурок", 0, 1);
         var n = _gameObserver.Stations.Count;
 
         if (n == 0 && !_isGameEnded) winFrame.GetComponent<CheckForWin>().GetEpisodeResult(
