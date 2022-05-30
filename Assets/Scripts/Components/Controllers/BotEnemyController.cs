@@ -35,7 +35,6 @@ public class BotEnemyController : MonoBehaviour
         _engine.OnRotate?.Invoke(GetRotationValue(lookVector, toPlayer));
         if (toPlayer.magnitude < 5)
         {
-            _engine.OnBoost?.Invoke(0.5f);
             _weaponController.OnShoot?.Invoke(toPlayer);
         }
         else
