@@ -13,6 +13,8 @@ TagManager:
   - Station
   - BackgroundImage
   - Celestial Body
+  - Planet
+  - Person
   layers:
   - Default
   - TransparentFX

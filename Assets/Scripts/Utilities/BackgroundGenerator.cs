@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Random = System.Random;
 
 public class BackgroundGenerator : MonoBehaviour
 {
@@ -20,11 +21,12 @@ public class BackgroundGenerator : MonoBehaviour
 
     void Update()
     {
+        var r = new Random();
         foreach (var newPosition in CreatePositions(_observer.Player.transform.position))
         {
             if (!_backgroundPositions.Contains(newPosition))
             {
-                _spawner.Spawn("BackgroundImage", newPosition, 0);
+                _spawner.Spawn(r.Next(1, 7).ToString(), newPosition, 0);
                 _backgroundPositions.Add(newPosition);
             };
         }
