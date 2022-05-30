@@ -14,7 +14,7 @@ public class BackgroundGenerator : MonoBehaviour
     private void Start()
     {
         _backgroundPositions = new List<Vector3>();
-        _spawner = GameObject.FindWithTag("Utilities").GetComponent<PrefabsSpawner>();
+        _spawner = GetComponent<PrefabsSpawner>();
         _observer = GameObject.FindWithTag("Utilities").GetComponent<GameObserver>();
     }
 
