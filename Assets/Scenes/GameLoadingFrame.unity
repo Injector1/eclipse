@@ -140,7 +140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &556722097
 RectTransform:
   m_ObjectHideFlags: 0
@@ -156,9 +156,9 @@ RectTransform:
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -12.856, y: 12.844002}
-  m_SizeDelta: {x: 2222.5, y: 1239.8}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 50.00002, y: 62.832}
+  m_SizeDelta: {x: 667.195, y: 291.6595}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &556722098
 MonoBehaviour:
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 556722096}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
@@ -180,22 +180,16 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 12800000, guid: 06cb5b72f91978841bad1872451125ec, type: 3}
-    m_FontSize: 64
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 0
-    m_MaxSize: 300
-    m_Alignment: 4
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: 'Romb.game
-
-    presents'
+  m_Sprite: {fileID: 21300000, guid: 52d87cf97ce95ad478817c31fae7cd28, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!222 &556722099
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -299,6 +293,7 @@ GameObject:
   - component: {fileID: 1391116180}
   - component: {fileID: 1391116182}
   - component: {fileID: 1391116181}
+  - component: {fileID: 1391116183}
   m_Layer: 5
   m_Name: GameName
   m_TagString: Untagged
@@ -322,8 +317,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -12.856, y: 12.844}
-  m_SizeDelta: {x: 2322.5, y: 1339.8}
+  m_AnchoredPosition: {x: 9, y: 0}
+  m_SizeDelta: {x: 892.7551, y: 292.1425}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1391116181
 MonoBehaviour:
@@ -347,13 +342,13 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 06cb5b72f91978841bad1872451125ec, type: 3}
-    m_FontSize: 100
+    m_FontSize: 150
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 300
     m_Alignment: 4
-    m_AlignByGeometry: 0
+    m_AlignByGeometry: 1
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
@@ -367,6 +362,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1391116179}
   m_CullTransparentMesh: 1
+--- !u!114 &1391116183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1391116179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0.11906943, g: 0, b: 0.24528301, a: 1}
+  m_EffectDistance: {x: 10, y: 10}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1493513449
 GameObject:
   m_ObjectHideFlags: 0
@@ -755,10 +765,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   frames:
-  - {fileID: 1196176646}
   - {fileID: 556722096}
   - {fileID: 1391116179}
-  frameTime: 401f0000b80b0000b80b0000
+  frameTime: 88130000a00f0000
   sprite: {fileID: 1609105078}
 --- !u!222 &2073013766
 CanvasRenderer:
