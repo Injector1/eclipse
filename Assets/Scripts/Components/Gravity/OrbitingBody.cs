@@ -16,6 +16,7 @@ public class OrbitingBody : MonoBehaviour
     private float _orbitRadius;
     private float _speed;
     private float _orbitTime;
+    private float _orbitUpdateTick;
 
     private void Awake()
     {
@@ -32,6 +33,8 @@ public class OrbitingBody : MonoBehaviour
         T = 2 * Mathf.PI * Mathf.Sqrt(_orbitRadius * _orbitRadius * _orbitRadius / U);
         _speed = Mathf.Sqrt(U / _orbitRadius);
         _orbitTime = T * Vector2.Angle(Vector2.right, -dirVector) / 360;
+        _orbitUpdateTick = T / 100;
+        Orbiting();
     }
 
     public Vector2 GetVelocity()
@@ -41,15 +44,16 @@ public class OrbitingBody : MonoBehaviour
         return normal * _speed;
     }
 
-    private void FixedUpdate()
+    private void Orbiting()
     {
-        _orbitTime += Time.fixedDeltaTime;
+        _orbitTime += _orbitUpdateTick;
         if (_orbitTime >= T)
             _orbitTime %= T;
         var t = _orbitTime / T * 2 * Mathf.PI;
         var x = _orbitRadius * Mathf.Cos(OrbitDirection * t);
         var y = _orbitRadius * Mathf.Sin(OrbitDirection * t);
-        _rigidbody.velocity = (OnOrbitOf.transform.position + new Vector3(x, y) - transform.position).normalized * _speed;
+        _rigidbody.velocity = (OnOrbitOf.transform.position + new Vector3(x, y) - transform.position) / _orbitUpdateTick;
+        this.StartCoroutine(Orbiting, _orbitUpdateTick);
     }
     
 }
