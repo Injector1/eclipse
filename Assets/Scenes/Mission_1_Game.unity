@@ -3093,24 +3093,10 @@ MonoBehaviour:
   - Player
   - Enemy
   - Planet
-  - 1
-  - 2
-  - 3
-  - 4
-  - 5
-  - 6
-  - 7
   GameObjects:
   - {fileID: 1893538251}
-  - {fileID: 936567076}
+  - {fileID: 3208213613296572647, guid: 2105faaf06d25f243845566d2a431c6c, type: 3}
   - {fileID: 7451608136176503472}
-  - {fileID: 6864279}
-  - {fileID: 1088127877}
-  - {fileID: 387918181}
-  - {fileID: 1013576581}
-  - {fileID: 824030800}
-  - {fileID: 1679549356}
-  - {fileID: 1166576515}
   SpawnTo: {fileID: 488195784}
 --- !u!114 &796956965
 MonoBehaviour:
