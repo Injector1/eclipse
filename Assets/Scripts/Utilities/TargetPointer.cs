@@ -42,8 +42,10 @@ namespace Utilities
 		
 		private GameObject GetNearestTarget(GameObject[] targets)
 		{
+			if (targets.Count(target => target.activeSelf) == 0) return null;
 			var distance = targets.Min(t => GetDistance(t.transform.position));
 			return targets.FirstOrDefault(t => Math.Abs(GetDistance(t.transform.position) - distance) < 1);
+
 		}
 
 		private void LateUpdate()

@@ -346,6 +346,7 @@ MonoBehaviour:
   MaxSpawnRadius: 10
   SpawnDelay: 5
   DelayDeviation: 0.2
+  MinDistanceToSpawn: 15
 --- !u!114 &7451608137330297680
 MonoBehaviour:
   m_ObjectHideFlags: 0

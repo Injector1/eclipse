@@ -9,12 +9,16 @@ public class SpawnerBody : MonoBehaviour
     [SerializeField] private float MaxSpawnRadius;
     [SerializeField] private float SpawnDelay;
     [SerializeField] private float DelayDeviation;
+    [SerializeField] public double MinDistanceToSpawn;
+    
+    private GameObserver _observer;
     private RandomExtensions _random;
     private PrefabsSpawner _spawner;
     private bool _stopFlag;
 
     private void Awake()
     {
+        _observer = GameObject.Find("Utilities").GetComponent<GameObserver>();
         _random = new RandomExtensions();
         _spawner = GameObject.FindWithTag("Utilities").GetComponent<PrefabsSpawner>();
         var health = GetComponent<Health>();
@@ -29,9 +33,18 @@ public class SpawnerBody : MonoBehaviour
 
     private void Spawn()
     {
-        if (_stopFlag)
-            return;
-        _spawner.Spawn("Enemy", transform.position + _random.GetRandomVector(MinSpawnRadius, MaxSpawnRadius), _random.GetFloat());
+        if (_stopFlag) return;
+        
+        if (MinDistanceToSpawn < 1e-9 || GetDistanceToPlayer() < MinDistanceToSpawn)
+            _spawner.Spawn("Enemy", transform.position + _random.GetRandomVector(MinSpawnRadius, MaxSpawnRadius), _random.GetFloat());
+            
         this.StartCoroutine(Spawn, (int) (SpawnDelay + 2 * (_random.GetFloat() - 0.5f) * DelayDeviation * SpawnDelay));
+    }
+    
+    private double GetDistanceToPlayer()
+    {
+        var p1 = _observer.Player.transform.position;
+        var p2 = gameObject.transform.position;
+        return Math.Sqrt((p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y));
     }
 }
