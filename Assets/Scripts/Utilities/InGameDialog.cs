@@ -39,7 +39,7 @@ namespace Utilities
 
         void Update()
         {
-            if (!_isPlaying || !Input.anyKeyDown) return;
+            if (!_isPlaying || !Input.GetKeyDown(KeyCode.Space)) return;
             
             if (dialogText.text == _text[_frameIndex].Replace("#", string.Empty))
             {

@@ -34,6 +34,12 @@ namespace Utilities
 			};
 		}
 
+		private void UpdateTargets()
+		{
+			_targets[stationPointer] = GameObject.FindGameObjectsWithTag("Station");
+			_targets[enemyPointer] = GameObject.FindGameObjectsWithTag("Enemy");
+		}
+
 		private float GetDistance(Vector3 t)
 		{
 			var p = _observer.Player.transform.position;
@@ -45,15 +51,19 @@ namespace Utilities
 			if (targets.Count(target => target.activeSelf) == 0) return null;
 			var distance = targets.Min(t => GetDistance(t.transform.position));
 			return targets.FirstOrDefault(t => Math.Abs(GetDistance(t.transform.position) - distance) < 1);
-
 		}
 
 		private void LateUpdate()
 		{
+			UpdateTargets();
 			foreach (var pointer in _targets.Keys)
 			{
 				var target = GetNearestTarget(_targets[pointer]);
-				if (target is null) return;
+				if (target is null)
+				{
+					pointer.gameObject.SetActive(false);
+					return;
+				}
 			
 				var realPos = _mainCamera.WorldToScreenPoint(target.transform.position);
 				var rect = new Rect(-_size, -_size, Screen.width + _size * 2, Screen.height + _size * 2);
