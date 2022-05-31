@@ -10,6 +10,7 @@ namespace Components.Episode_1
     {
         private GameObject _utilities;
         private DateTime _inGameTime;
+        private bool _endOfFirstDialogue;
         
         private GameObserver _observer;
         private InGameDialog _dialog;
@@ -51,15 +52,16 @@ namespace Components.Episode_1
                 FirstEnemyKill();
                 return;
             }
-
-            if ((DateTime.Now - _observer.GameStartTime).Seconds > 7 && _dialoguesQueue[0] == FirstEnemy)
+            
+            if (Math.Sqrt(Math.Pow(_observer.Player.transform.position.x, 2) + Math.Pow(_observer.Player.transform.position.x, 2)) > 3
+             && _dialoguesQueue[0] == FirstEnemy)
             {
                 SpawnEnemyNearToPlayer(10);
                 FirstEnemy();
                 return;
             }
 
-            if ((DateTime.Now - _observer.GameStartTime).Seconds > 0.1 && _dialoguesQueue[0] == GameStart)
+            if ((DateTime.Now - _observer.GameStartTime).Seconds > 0 && _dialoguesQueue[0] == GameStart)
                 GameStart();
         }
 
@@ -67,9 +69,33 @@ namespace Components.Episode_1
         {
             _dialog.StartDialog(new List<Dialog>
             {
-                new Dialog("это начало игры!", 1, 4)
+                new Dialog("Твою-ж дивизию,# где я?&" +
+                           "Пустота вокруг,# голова раскалывается - отличный день, чтобы умереть.&" +
+                           "Прием,# меня кто-нибудь слышит?!# Ау?!", 0, 4),
+                new Dialog("А…#к…#о…#я", 3, 2),
+                new Dialog("А, что?!# Прием-прием,# меня слышно?!", 3, 4),
+                new Dialog("Боже, как я рад кого-то услышать!# Кто вы?# Меня подбили около Земли," +
+                           " я потерял сознание, проснулся - и вот уже здесь.## Вокруг пустота," +
+                           " ни черта не вижу, связь барахлит. Ало,# ало,# вы слышите меня?", 0, 4),
+                new Dialog("*помехи* Да, я тут! Господи, я уже несколько лет не слышала человеческий голос, и не…", 3, 4),
+                new Dialog("Что?! О чем это вы? Где вы? Куда я попал?", 0, 4),
+                new Dialog("Это долгая история. Давайте сначала разберемся, что нам с вами делать", 3, 4),
+                new Dialog("Постой, кажется задержка связи не такая уж и большая." +
+                           " Кажется, мы где-то совсем недалеко друг от друга? Где вы?", 0, 4),
+                new Dialog("Мой прибор для определения местоположения сломан, придется действовать вслепую," +
+                           " вижу из иллюминатора# а*помехи*ыу #*обрыв связи*", 3, 4),
+                new Dialog("Екарный бабай, ни черта не понятно. Ало?!# Ало?!", 0, 4),
+                new Dialog("Хуем по лбу не дало?# Шкипер, слушай сюда: я встроен в твой корабль и буду тебе, простофиле," +
+                           " помогать.# Разберись сначала с управлением, салага", 1, 4),
+                new Dialog("Че?", 0, 4),
+                new Dialog("Хуй в оче. Видишь на пульте управления кнопки WASD?# На них будешь рулить махиной." +
+                           "# Если придется стрелять - жми на ЛКМ или CTRL - они на разных сторонах панели", 1, 4),
+                new Dialog("Понял, но# как…ты?# Ладно, понял, лучше лишних слов не говорить", 0, 4),
+                new Dialog("Та баба, кажется, где-то рядом, мои алгоритмы проанализировали ваш разговор." +
+                           " Попробуй газануть, проверим, сильно ли повредился корабль", 1, 4)
             });
             _dialoguesQueue.RemoveAt(0);
+            _endOfFirstDialogue = true;
         }
 
         private void SpawnEnemyNearToPlayer(int offset)
@@ -83,8 +109,11 @@ namespace Components.Episode_1
         {
             _dialog.StartDialog(new List<Dialog>
             {
-                new Dialog("радары засекли поблизости врага, будь осторожен!&Красный указатель поможет тебе понять," +
-                           " где находится враг", 1, 4)
+                new Dialog("Вроде все довольно неплохо.", 1, 4),
+                new Dialog("Стой,# радары показывают, что к нам приближается корабль", 1, 4),
+                new Dialog("Немощный старик, мой повелитель отправил меня расправиться с тобой.#" +
+                           " Посмотрим на что ты способен", 2, 4),
+                new Dialog("Стреляй, жми, екарный бабай", 1, 4)
             });
             _dialoguesQueue.RemoveAt(0);
         }
@@ -93,7 +122,9 @@ namespace Components.Episode_1
         {
             _dialog.StartDialog(new List<Dialog>
             {
-                new Dialog("это твой первый килл!", 1, 4)
+                new Dialog("Дед, ну есть еще порох в пороховницах." +
+                           " Раз он здесь появился, значит где-то рядом есть вражеская база." +
+                           " Попробуй пролететь подальше, может встретим кого-нибудь", 1, 4)
             }); 
             _dialoguesQueue.RemoveAt(0);
         }

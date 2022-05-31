@@ -25,6 +25,7 @@ namespace Utilities
         [SerializeField] private GameObject[] speakers;
         [SerializeField] private Text dialogText;
         [SerializeField] private AudioSource typingSound;
+        [SerializeField] private GameObject helpMessage;
 
         private List<Dialog> _dialogues;
         private int _dialogIndex;
@@ -65,11 +66,11 @@ namespace Utilities
 
         IEnumerator TypeLine()
         {
-            TurnExtensions(true);
-    
             foreach(char c in _text[_frameIndex])
             {
+                if (!typingSound.isPlaying) TurnExtensions(true);
                 if (c != '#') dialogText.text += c;
+                else typingSound.Stop();
                 yield return new WaitForSeconds(c == '#' ? 1 / BreakTime : 1 / _textSpeed);
             }
             TurnExtensions(false);
@@ -97,6 +98,7 @@ namespace Utilities
     
         private void TurnExtensions(bool condition)
         {
+            helpMessage.SetActive(!condition);
             if (condition) typingSound.Play();
             else typingSound.Stop(); 
         }
