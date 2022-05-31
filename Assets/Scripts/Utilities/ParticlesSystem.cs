@@ -7,6 +7,7 @@ namespace Components
     public class ParticlesSystem : MonoBehaviour
     {
         [SerializeField] private ParticleSystem part;
+        [SerializeField] private Transform spawnTo;
         
         
         /// <summary>
@@ -16,7 +17,7 @@ namespace Components
         /// <param name="position"> Позиция запуска системы частиц </param>
         public void PlayNewParticles(int power, Vector2 position)
         {
-            var particles = Instantiate(part);
+            var particles = Instantiate(part, spawnTo);
             var mainModule = particles.main;
             var emissionModule = particles.emission;
             particles.transform.position = position;
