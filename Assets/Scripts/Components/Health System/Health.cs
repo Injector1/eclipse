@@ -28,7 +28,7 @@ public class Health : MonoBehaviour
         if (TryGetComponent<IController>(out var controller))
             controller.IsDisabled = true;
         IsAlive = false;
-        ActionPlanner.PostponeAnAction(() => gameObject.SetActive(false), 1000);
+        this.StartCoroutine(() => gameObject.SetActive(false), 1);
     }
     
     private void HealthAdd(float hpAdd)

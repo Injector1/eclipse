@@ -20,7 +20,7 @@ public class PlasmaGun : Weapon
         _coolDown = GetComponent<CoolDown>();
         _weaponController = GetComponentInParent<WeaponController>();
         GameObjectWithBullets = GameObject.FindWithTag("Bullets");
-        _random = new Random();
+        _random = new Random(RandomExtensions.GetNextSeed());
     }
     
     public void Start()

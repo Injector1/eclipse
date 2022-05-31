@@ -13,14 +13,14 @@ public class Shield : MonoBehaviour
     public Action OnShieldChange;
 
     private DateTime _lastDamageTaken;
-    private int _tickInMS = 100;
+    private float _tickInSec = 0.1f;
     private float _regenPerTick;
     private bool _regenStopFlag;
 
     private void Awake()
     {
         CurrentShield = CurrentShield == 0 ? MaxShield : CurrentShield;
-        _regenPerTick = ShieldRegenPerSecond * _tickInMS / 1000;
+        _regenPerTick = ShieldRegenPerSecond * _tickInSec;
         _regenStopFlag = true;
     }
     
@@ -65,6 +65,6 @@ public class Shield : MonoBehaviour
         if (CurrentShield < MaxShield  && (DateTime.Now - _lastDamageTaken).TotalSeconds >= SecondsWithoutDamageToRegen)
             ShieldAdd(_regenPerTick);
         if (!_regenStopFlag)
-            ActionPlanner.PostponeAnAction(Regen, _tickInMS);
+            this.StartCoroutine(Regen, _tickInSec);
     }
 }

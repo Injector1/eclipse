@@ -6,14 +6,14 @@ using UnityEngine;
 public class CoolDown : MonoBehaviour
 {
     private bool isCoolDown;
-    [SerializeField] public int CoolDownInMs;
+    [SerializeField] public float CoolDownInSec;
 
     public bool TryToShoot()
     {
         if (isCoolDown)
             return false;
         isCoolDown = true;
-        ActionPlanner.PostponeAnAction(() => isCoolDown = false, CoolDownInMs);
+        this.StartCoroutine(() => isCoolDown = false, CoolDownInSec);
         return true;
     }
 }

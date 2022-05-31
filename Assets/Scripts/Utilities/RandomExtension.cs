@@ -19,4 +19,8 @@ public class RandomExtensions
     {
         return GetRandomVector(minLength + GetFloat() * (maxLength - minLength));
     }
+
+    private static int _randomSeed;
+
+    public static int GetNextSeed() => _randomSeed++;
 }

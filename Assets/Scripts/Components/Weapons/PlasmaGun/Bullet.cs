@@ -7,10 +7,10 @@ public class Bullet : MonoBehaviour
 
     private void Start()
     {
-        ActionPlanner.PostponeAnAction(() => Destroy(gameObject), LifeTime);
+        this.StartCoroutine(() => Destroy(gameObject), LifeTime);
     }
     
-    private void OnTriggerStay2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.GetComponent<Collider2D>().isTrigger)
             return;

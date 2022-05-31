@@ -25,8 +25,8 @@ public class AnimatorAdapter : MonoBehaviour
         _health.OnDeath += () => { StopAllAnimations(); StartAnimation("isDead"); };
         try
         {
-            _engine.OnBoost += _ => StartAnimation("isMoving", 100);
-            _weaponController.OnShoot += _ => StartAnimation("isShooting", 100);
+            _engine.OnBoost += _ => StartAnimation("isMoving", 0.1f);
+            _weaponController.OnShoot += _ => StartAnimation("isShooting", 0.1f);
         }
         catch (Exception e)
         {
@@ -40,14 +40,14 @@ public class AnimatorAdapter : MonoBehaviour
             StopAnimation(state);
     }
     
-    public void StartAnimation(string state, int durationInMs)
+    public void StartAnimation(string state, float durationInSeconds)
     {
         StartAnimation(state);
-        ActionPlanner.PostponeAnAction(() =>
+        this.StartCoroutine(() =>
         {
-            if (LastUpdated[state].AddMilliseconds(durationInMs) <= DateTime.Now)
+            if (LastUpdated[state].AddSeconds(durationInSeconds) <= DateTime.Now)
                 StopAnimation(state);
-        }, durationInMs);
+        }, durationInSeconds);
     }
     
     public void StartAnimation(string state)

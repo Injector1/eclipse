@@ -32,6 +32,6 @@ public class SpawnerBody : MonoBehaviour
         if (_stopFlag)
             return;
         _spawner.Spawn("Enemy", transform.position + _random.GetRandomVector(MinSpawnRadius, MaxSpawnRadius), _random.GetFloat());
-        ActionPlanner.PostponeAnAction(Spawn, (int) (SpawnDelay + 2 * (_random.GetFloat() - 0.5f) * DelayDeviation * SpawnDelay));
+        this.StartCoroutine(Spawn, (int) (SpawnDelay + 2 * (_random.GetFloat() - 0.5f) * DelayDeviation * SpawnDelay));
     }
 }
