@@ -4160,6 +4160,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad80ef65de41e124bbeb3481568d7874, type: 3}
+--- !u!1 &1348887637 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4129122255181448270, guid: ff36c9e47adb7974b99db4320acd4fe9, type: 3}
+  m_PrefabInstance: {fileID: 187337682268642050}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1430520945
 GameObject:
   m_ObjectHideFlags: 0
@@ -5923,6 +5928,10 @@ PrefabInstance:
       value: Utilities
       objectReference: {fileID: 0}
     - target: {fileID: 187337681840783907, guid: ff36c9e47adb7974b99db4320acd4fe9, type: 3}
+      propertyPath: helpMessage
+      value: 
+      objectReference: {fileID: 1348887637}
+    - target: {fileID: 187337681840783907, guid: ff36c9e47adb7974b99db4320acd4fe9, type: 3}
       propertyPath: speakers.Array.size
       value: 4
       objectReference: {fileID: 0}
@@ -5994,6 +6003,10 @@ PrefabInstance:
       propertyPath: loseFrame
       value: 
       objectReference: {fileID: 1034545451}
+    - target: {fileID: 187337681840783911, guid: ff36c9e47adb7974b99db4320acd4fe9, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 187337681840783915, guid: ff36c9e47adb7974b99db4320acd4fe9, type: 3}
       propertyPath: spawnTo
       value: 
@@ -6006,9 +6019,21 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 187337683088227178, guid: ff36c9e47adb7974b99db4320acd4fe9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 187337683700256252, guid: ff36c9e47adb7974b99db4320acd4fe9, type: 3}
+      propertyPath: m_Text
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1480502442195360805, guid: ff36c9e47adb7974b99db4320acd4fe9, type: 3}
       propertyPath: m_Text
       value: "\u0433\u043E\u043B\u043E\u0441 \u0438\u0437 \u0440\u0430\u0446\u0438\u0438"
+      objectReference: {fileID: 0}
+    - target: {fileID: 4129122255181448270, guid: ff36c9e47adb7974b99db4320acd4fe9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ff36c9e47adb7974b99db4320acd4fe9, type: 3}
