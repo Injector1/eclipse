@@ -6232,11 +6232,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7451608137330297686, guid: ad80ef65de41e124bbeb3481568d7874, type: 3}
       propertyPath: MaxHealth
-      value: 3000
+      value: 2000
       objectReference: {fileID: 0}
     - target: {fileID: 7451608137330297686, guid: ad80ef65de41e124bbeb3481568d7874, type: 3}
       propertyPath: CurrentHealth
-      value: 3000
+      value: 2000
       objectReference: {fileID: 0}
     - target: {fileID: 7451608137330297690, guid: ad80ef65de41e124bbeb3481568d7874, type: 3}
       propertyPath: EntityToSpawn
