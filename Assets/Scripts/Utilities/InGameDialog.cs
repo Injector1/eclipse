@@ -21,11 +21,13 @@ namespace Utilities
     
     public class InGameDialog : MonoBehaviour
     {
+        [SerializeField] private GameObject helpMessage;
         [SerializeField] private GameObject dialogFrame;
         [SerializeField] private GameObject[] speakers;
+        
         [SerializeField] private Text dialogText;
         [SerializeField] private AudioSource typingSound;
-        [SerializeField] private GameObject helpMessage;
+        [SerializeField] private AudioSource radioInterference;
 
         private List<Dialog> _dialogues;
         private int _dialogIndex;
@@ -38,11 +40,19 @@ namespace Utilities
         private int _frameIndex;
         private const float BreakTime = 10000;
 
+        private string ReplaceSpecialSymbols(string s)
+        {
+            return dialogText.text = s
+                .Replace("#", string.Empty)
+                .Replace("$", string.Empty);
+        } 
+
         void Update()
         {
             if (!_isPlaying || !Input.GetKeyDown(KeyCode.Space)) return;
             
-            if (dialogText.text == _text[_frameIndex].Replace("#", string.Empty))
+            if (dialogText.text == ReplaceSpecialSymbols(_text[_frameIndex])
+                .Replace("#", string.Empty))
             {
                 IsNextLine();
             }
@@ -50,7 +60,7 @@ namespace Utilities
             {
                 TurnExtensions(false);
                 StopAllCoroutines();
-                dialogText.text = _text[_frameIndex].Replace("#", string.Empty);
+                dialogText.text = ReplaceSpecialSymbols(_text[_frameIndex]);
             }
         }
 
@@ -69,8 +79,24 @@ namespace Utilities
             foreach(char c in _text[_frameIndex])
             {
                 if (!typingSound.isPlaying) TurnExtensions(true);
-                if (c != '#') dialogText.text += c;
-                else typingSound.Stop();
+
+                if (c != '#' && c != '$')
+                {
+                    dialogText.text += c;
+                }
+                else
+                {
+                    typingSound.Stop();
+                    if (c == '$')
+                    {
+                        if (!radioInterference.isPlaying)
+                        {
+                            typingSound.Stop();
+                            radioInterference.Play();
+                        }
+                        else radioInterference.Stop();
+                    }
+                }
                 yield return new WaitForSeconds(c == '#' ? 1 / BreakTime : 1 / _textSpeed);
             }
             TurnExtensions(false);
@@ -98,6 +124,7 @@ namespace Utilities
     
         private void TurnExtensions(bool condition)
         {
+            if (!condition) radioInterference.Stop();
             helpMessage.SetActive(!condition);
             if (condition) typingSound.Play();
             else typingSound.Stop(); 

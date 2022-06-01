@@ -6,23 +6,22 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    private static bool IsPaused = false;
-    public GameObject pauseMenu;
-    public GameObject loseFrame;
+    private static bool _isPaused = false;
+    [SerializeField] private GameObject pauseMenu;
+    [SerializeField] private GameObject loseFrame;
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (!Input.GetKeyDown(KeyCode.Escape)) return;
+        
+        switch (_isPaused)
         {
-            switch (IsPaused)
-            {
-                case true:
-                    ResumeGame();
-                    break;
-                case false:
-                    PauseGame();
-                    break;
-            }
+            case true:
+                ResumeGame();
+                break;
+            case false:
+                PauseGame();
+                break;
         }
     }
 
@@ -30,14 +29,14 @@ public class PauseMenu : MonoBehaviour
     {
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
-        IsPaused = false;
+        _isPaused = false;
     }
 
     void PauseGame()
     {
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
-        IsPaused = true;
+        _isPaused = true;
     }
 
     public void LoadMenu()
