@@ -56,7 +56,7 @@ namespace Components.Episode_1
                 return;
             }
             
-            if (Math.Sqrt(Math.Pow(_observer.Player.transform.position.x, 2) + Math.Pow(_observer.Player.transform.position.x, 2)) > 3
+            if (Math.Sqrt(Math.Pow(_observer.Player.transform.position.x, 2) + Math.Pow(_observer.Player.transform.position.y, 2)) > 10
              && _dialoguesQueue[0] == FirstEnemy)
             {
                 SpawnEnemyNearToPlayer(10);
