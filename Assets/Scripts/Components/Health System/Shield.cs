@@ -10,6 +10,8 @@ public class Shield : MonoBehaviour
     [SerializeField] public float CurrentShield;
     [SerializeField] public float SecondsWithoutDamageToRegen;
     [SerializeField] public float ShieldRegenPerSecond;
+    [SerializeField] public AudioSource shieldRegen;
+    [SerializeField] public AudioSource breakShield;
     public Action OnShieldChange;
 
     private DateTime _lastDamageTaken;
@@ -37,6 +39,7 @@ public class Shield : MonoBehaviour
 
     public float TakeDamage(float damage)
     {
+        breakShield.Play();
         _lastDamageTaken = DateTime.Now;
         StartRegen();
         CurrentShield -= damage;
@@ -57,6 +60,7 @@ public class Shield : MonoBehaviour
     
     public void StopRegen()
     {
+        shieldRegen.Play();
         _regenStopFlag = true;
     }
     
