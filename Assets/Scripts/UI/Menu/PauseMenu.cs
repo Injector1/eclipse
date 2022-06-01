@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,11 +9,11 @@ public class PauseMenu : MonoBehaviour
 {
     private static bool _isPaused = false;
     [SerializeField] private GameObject pauseMenu;
-    [SerializeField] private GameObject loseFrame;
+    [SerializeField] private GameObject[] frames;
 
     private void Update()
     {
-        if (!Input.GetKeyDown(KeyCode.Escape)) return;
+        if (!Input.GetKeyDown(KeyCode.Escape) || frames.Any(frame => frame.activeSelf)) return;
         
         switch (_isPaused)
         {
@@ -48,7 +49,7 @@ public class PauseMenu : MonoBehaviour
     public void RetryLevel()
     {
         Time.timeScale = 1f;
-        loseFrame.SetActive(false);
+        frames[0].SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

@@ -13,6 +13,7 @@ public class CinemachineCameraController : MonoBehaviour, IController
     {
         _camera = GetComponent<CinemachineVirtualCamera>();
         _camera.Follow = GameObject.FindWithTag("Player").transform;
+        _camera.m_Lens.OrthographicSize = 6;
     }
 
 
