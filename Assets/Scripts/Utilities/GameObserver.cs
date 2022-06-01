@@ -6,6 +6,9 @@ using UnityEngine;
 public class GameObserver : MonoBehaviour
 {
     public DateTime GameStartTime;
+    public DateTime FirstKillTime;
+    public DateTime FirstStationKillTime;
+    
     public int EnemyKillsCount;
     public int StationKillsCount;
 
@@ -40,6 +43,15 @@ public class GameObserver : MonoBehaviour
 
     private void HandleEntityDeath(GameObject entity)
     {
+        switch (entity.tag)
+        {
+            case "Enemy":
+                FirstKillTime = DateTime.Now;
+                break;
+            case "Station":
+                FirstStationKillTime = DateTime.Now;
+                break;
+        }
         RemoveEntityFromObserver(entity);
         OnEntityDeath?.Invoke(entity);
     }

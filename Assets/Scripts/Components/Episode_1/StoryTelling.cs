@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using UnityEngine;
 using Utilities;
 
@@ -35,7 +36,8 @@ namespace Components.Episode_1
         {
             if (_dialoguesQueue.Count == 0) return;
 
-            if (_observer.StationKillsCount > 0 && _dialoguesQueue[0] == FirstStationKill)
+            if ((DateTime.Now - _observer.FirstStationKillTime).Seconds > 1  &&
+                _observer.StationKillsCount > 0 && _dialoguesQueue[0] == FirstStationKill)
             {
                 FirstStationKill();
                 return;
@@ -47,7 +49,8 @@ namespace Components.Episode_1
                 return;
             }
 
-            if (_observer.EnemyKillsCount > 0 && _dialoguesQueue[0] == FirstEnemyKill)
+            if ((DateTime.Now - _observer.FirstKillTime).Seconds > 0.8 
+                && _observer.EnemyKillsCount > 0 && _dialoguesQueue[0] == FirstEnemyKill)
             {
                 FirstEnemyKill();
                 return;
@@ -165,7 +168,7 @@ namespace Components.Episode_1
                            " Они называют его “Повелитель”", 3, 4),
                 new Dialog("Господи, святые угодники!", 0, 4),
                 new Dialog("Спокойно, кажется мы с вами уже совсем рядом. Я нахожусь около огромной алой планеты," +
-                           " поспешите, вы их разозлил…$*обрыв связи*#$", 3, 4),
+                           " поспешите, вы их разозлил…$#*обрыв связи*#$", 3, 4),
                 new Dialog("Черт, кажется, на нас открыли открыли охоту", 0, 4),
                 new Dialog("На кого “на нас”, старый пердун? Я - машина.&" +
                            "Кстати, шкипер, пока не забыл. Выключай деменцию и запоминай, что я тебе говорю." +
