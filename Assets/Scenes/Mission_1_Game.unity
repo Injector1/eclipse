@@ -541,6 +541,10 @@ PrefabInstance:
       propertyPath: Damage
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 4101221585168354269, guid: e2fa9a7f792bfbe4f9841d75111bf80d, type: 3}
+      propertyPath: m_Pitch
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4768629103780747578, guid: e2fa9a7f792bfbe4f9841d75111bf80d, type: 3}
       propertyPath: m_Name
       value: Spaceship
@@ -6118,6 +6122,10 @@ PrefabInstance:
     - target: {fileID: 334584842158152971, guid: ff36c9e47adb7974b99db4320acd4fe9, type: 3}
       propertyPath: Loop
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 334584842158152971, guid: ff36c9e47adb7974b99db4320acd4fe9, type: 3}
+      propertyPath: m_Volume
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 334584842158152971, guid: ff36c9e47adb7974b99db4320acd4fe9, type: 3}
       propertyPath: m_audioClip
