@@ -20,8 +20,13 @@ public class CinemachineCameraController : MonoBehaviour, IController
     {
         if (IsDisabled)
             return;
+
+        if (Input.mouseScrollDelta == Vector2.zero) return;
         
-        if (Input.mouseScrollDelta != Vector2.zero)
-            _camera.m_Lens.OrthographicSize -= Input.mouseScrollDelta.y * _camera.m_Lens.OrthographicSize / 20;
+        var newDistance = _camera.m_Lens.OrthographicSize -
+                          Input.mouseScrollDelta.y * _camera.m_Lens.OrthographicSize / 20;
+        if (newDistance > 1.5 && newDistance < 7)
+            _camera.m_Lens.OrthographicSize = newDistance;
+
     }
 }
