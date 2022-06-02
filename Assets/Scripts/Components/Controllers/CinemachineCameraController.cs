@@ -17,7 +17,6 @@ public class CinemachineCameraController : MonoBehaviour, IController
         _camera.Follow = GameObject.FindWithTag("Player").transform;
     }
 
-
     public void Update()
     {
         if (IsDisabled)

@@ -9,6 +9,8 @@ namespace Components.Episode_1
 {
     public class StoryTelling : MonoBehaviour
     {
+        [SerializeField] private GameObject planet;
+        
         private GameObject _utilities;
         private DateTime _inGameTime;
         private bool _endOfFirstDialogue;
@@ -28,13 +30,21 @@ namespace Components.Episode_1
 
             _dialoguesQueue = new List<Action>
             {
-                GameStart, FirstEnemy, FirstEnemyKill, NearToStation, FirstStationKill
+                GameStart, FirstEnemy, FirstEnemyKill, NearToStation, FirstStationKill, NearToPlanet,
+                ClearPlanet, FarFromPlanet
             };
         }
 
         private void Update()
         {
             if (_dialoguesQueue.Count == 0) return;
+            
+            if (DistanceToPlanet() < 40 && _dialoguesQueue[0] == NearToPlanet)
+            {
+                SpawnEnemyNearToPlanet();
+                NearToPlanet();
+                return;
+            }
 
             if ((DateTime.Now - _observer.FirstStationKillTime).Seconds > 1  &&
                 _observer.StationKillsCount > 0 && _dialoguesQueue[0] == FirstStationKill)
@@ -43,7 +53,7 @@ namespace Components.Episode_1
                 return;
             }
 
-            if (DistanceToFirstStation() < 30 && _dialoguesQueue[0] == NearToStation)
+            if (DistanceToFirstStation() < 40 && _dialoguesQueue[0] == NearToStation)
             {
                 NearToStation();
                 return;
@@ -101,6 +111,17 @@ namespace Components.Episode_1
             _endOfFirstDialogue = true;
         }
 
+        private void SpawnEnemyNearToPlanet()
+        {
+            var positions = new Vector3[]
+            {
+                new Vector3(-140, 160, 0), new Vector3(-146, 162, 0), new Vector3(-125, 157, 0), new Vector3(-117, 158, 0)
+            };
+            
+            for (int i = 0; i < 4; i++)
+                _spawner.Spawn("Enemy", positions[i]);
+        }
+
         private void SpawnEnemyNearToPlayer(int offset)
         {
             var p = _observer.Player.transform.position;
@@ -132,6 +153,14 @@ namespace Components.Episode_1
                            "Следуй за желтой стрелочкой на радаре. Она приведет к вражеской базе", 1, 4)
             }); 
             _dialoguesQueue.RemoveAt(0);
+        }
+
+        private double DistanceToPlanet()
+        {
+            var p1 = _observer.Player.transform.position;
+            var p2 = planet.transform.position;
+
+            return Math.Sqrt((p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y));
         }
 
         private double DistanceToFirstStation()
@@ -177,6 +206,33 @@ namespace Components.Episode_1
                            " Она восполняется со временем", 1, 4),
                 new Dialog("Ух, веселый денек нас ждет", 0, 4),
                 new Dialog("Ты слышал, что сказала девушка? Мы должны искать огромную красную планету. Держи оружие на готове", 1, 4)
+            }); 
+            _dialoguesQueue.RemoveAt(0);
+        }
+        
+        private void NearToPlanet()
+        {
+            _dialog.StartDialog(new List<Dialog>
+            {
+                new Dialog("близок к планете", 1, 4)
+            }); 
+            _dialoguesQueue.RemoveAt(0);
+        }
+        
+        private void ClearPlanet()
+        {
+            _dialog.StartDialog(new List<Dialog>
+            {
+                new Dialog("очистил планету от врагов", 1, 4)
+            }); 
+            _dialoguesQueue.RemoveAt(0);
+        }
+        
+        private void FarFromPlanet()
+        {
+            _dialog.StartDialog(new List<Dialog>
+            {
+                new Dialog("ты достатончо далеко от планеты", 1, 4)
             }); 
             _dialoguesQueue.RemoveAt(0);
         }
