@@ -329,10 +329,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EntityToSpawn: {fileID: 936567076}
   MinSpawnRadius: 1
-  MaxSpawnRadius: 3
-  SpawnDelay: 5
+  MaxSpawnRadius: 5
+  SpawnDelay: 2
   DelayDeviation: 0.2
-  MinDistanceToSpawn: 15
+  MinDistanceToSpawn: 20
   EnemyCountToSpawn: 3
 --- !u!1 &176477180
 GameObject:
@@ -434,7 +434,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7788420166023067625, guid: 734c8a3853a04824e8c89833795310e3, type: 3}
       propertyPath: m_Mass
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7788420166023067625, guid: 734c8a3853a04824e8c89833795310e3, type: 3}
       propertyPath: m_Constraints
@@ -444,6 +444,10 @@ PrefabInstance:
       propertyPath: m_UseAutoMass
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7788420166023067625, guid: 734c8a3853a04824e8c89833795310e3, type: 3}
+      propertyPath: m_GravityScale
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 7788420166023067626, guid: 734c8a3853a04824e8c89833795310e3, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -451,6 +455,10 @@ PrefabInstance:
     - target: {fileID: 7788420166023067629, guid: 734c8a3853a04824e8c89833795310e3, type: 3}
       propertyPath: Velocity.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7788420166023067629, guid: 734c8a3853a04824e8c89833795310e3, type: 3}
+      propertyPath: AngularVelocity
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 734c8a3853a04824e8c89833795310e3, type: 3}
@@ -579,15 +587,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4087865618091617812, guid: e2fa9a7f792bfbe4f9841d75111bf80d, type: 3}
       propertyPath: MaxHealth
-      value: 350
+      value: 800
       objectReference: {fileID: 0}
     - target: {fileID: 4087865618091617812, guid: e2fa9a7f792bfbe4f9841d75111bf80d, type: 3}
       propertyPath: CurrentHealth
-      value: 350
+      value: 800
       objectReference: {fileID: 0}
     - target: {fileID: 4087865618091617817, guid: e2fa9a7f792bfbe4f9841d75111bf80d, type: 3}
       propertyPath: MaxSpeedSqr
-      value: 500
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 4087865618254985768, guid: e2fa9a7f792bfbe4f9841d75111bf80d, type: 3}
       propertyPath: GameObjectWithBullets
@@ -2583,10 +2591,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EntityToSpawn: {fileID: 936567076}
   MinSpawnRadius: 1
-  MaxSpawnRadius: 3
-  SpawnDelay: 4
+  MaxSpawnRadius: 5
+  SpawnDelay: 2
   DelayDeviation: 0.2
-  MinDistanceToSpawn: 15
+  MinDistanceToSpawn: 20
   EnemyCountToSpawn: 3
 --- !u!1001 &914234794
 PrefabInstance:
