@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.MemoryProfiler;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,7 +5,7 @@ public class MainMenu : MonoBehaviour
 {
     public void PlaySandbox()
     {
-        SceneManager.LoadScene(4); 
+        SceneManager.LoadScene(3); 
     }
     
     public void PlayGame()

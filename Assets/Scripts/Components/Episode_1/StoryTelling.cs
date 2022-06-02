@@ -10,10 +10,10 @@ namespace Components.Episode_1
     public class StoryTelling : MonoBehaviour
     {
         [SerializeField] private GameObject planet;
+        [SerializeField] private GameObject[] spawners;
         
         private GameObject _utilities;
-        private DateTime _inGameTime;
-        private bool _endOfFirstDialogue;
+        private DateTime _clearPlanetTime;
 
         private CheckForWin _winChecker;
         private GameObserver _observer;
@@ -32,7 +32,7 @@ namespace Components.Episode_1
 
             _dialoguesQueue = new List<Action>
             {
-                GameStart, FirstEnemy, FirstEnemyKill, NearToStation, FirstStationKill, NearToPlanet,
+                GameStart, FirstEnemy, FirstEnemyKill, NearToStation, FirstStationKill, NearToPlanet, ClearPlanet,
                  FarFromPlanet
             };
         }
@@ -41,21 +41,21 @@ namespace Components.Episode_1
         {
             if (_dialoguesQueue.Count == 0) return;
             
-            if (DistanceToPlanet() > 100 && _dialoguesQueue[0] == FarFromPlanet)
+            if ((DateTime.Now - _clearPlanetTime).Seconds > 1 && _dialoguesQueue[0] == FarFromPlanet)
             {
                 FarFromPlanet();
                 return;
             }
             
-            // if (false && _dialoguesQueue[0] == ClearPlanet)
-            // {
-            //     ClearPlanet();
-            //     return;
-            // }
+            if (spawners.All(s => !s.activeSelf) && _dialoguesQueue[0] == ClearPlanet)
+            {
+                _clearPlanetTime = DateTime.Now;
+                ClearPlanet();
+                return;
+            }
             
             if (DistanceToPlanet() < 40 && _dialoguesQueue[0] == NearToPlanet)
             {
-                SpawnEnemyNearToPlanet();
                 NearToPlanet();
                 return;
             }
@@ -122,16 +122,6 @@ namespace Components.Episode_1
                            " Попробуй газануть, проверим, сильно ли повредился корабль", 1, 4)
             });
             _dialoguesQueue.RemoveAt(0);
-            _endOfFirstDialogue = true;
-        }
-
-        private void SpawnEnemyNearToPlanet()
-        {
-            foreach (var pos in new Vector3[]
-            {
-                new Vector3(-100, 74, 0)
-            }
-            ) _spawner.Spawn("Enemy", pos);
         }
 
         private void SpawnEnemyNearToPlayer(int offset)
@@ -189,7 +179,8 @@ namespace Components.Episode_1
         {
             _dialog.StartDialog(new List<Dialog>()
             {
-                new Dialog("ты близок к станции врага!", 1, 4)
+                new Dialog("Екарный бабай, что это такое? Почему ты меня не предупредил?", 0, 4),
+                new Dialog("Я че по-твоему, провидец что ли? Сбавь газу и атакуй их!", 1, 4)
             }); 
             _dialoguesQueue.RemoveAt(0);
         }
@@ -217,7 +208,9 @@ namespace Components.Episode_1
                            "Красная - жизненно необходимый щит для корабля. Бирюзовая - улучшенная защита." +
                            " Она восполняется со временем", 1, 4),
                 new Dialog("Ух, веселый денек нас ждет", 0, 4),
-                new Dialog("Ты слышал, что сказала девушка? Мы должны искать огромную красную планету. Держи оружие на готове", 1, 4)
+                new Dialog("Ты слышал, что сказала девушка? Мы должны искать огромную красную планету. " +
+                           "Приборы показывают, что в нашем диапазоне видимости есть только одна система планет.&" +
+                           "Я ее тебе пометил на дисплее - следуй за указателем.", 1, 4)
             }); 
             _dialoguesQueue.RemoveAt(0);
         }
@@ -226,7 +219,13 @@ namespace Components.Episode_1
         {
             _dialog.StartDialog(new List<Dialog>
             {
-                new Dialog("близок к планете", 1, 4)
+                new Dialog("Прием!? Прием!? Мы у красной планеты", 0, 4),
+                new Dialog("*зловещий смех*", 3, 4),
+                new Dialog("Что, старик? Прилетел навестить свою новую подружку?&" +
+                           "Мои ребята перехватили ваши разговоры, теперь она у меня. Солдаты, уничтожить его!", 2, 4),
+                new Dialog("Черт, засада", 0, 4),
+                new Dialog("Бренчи костями, хрыщ, иначе бабка будет оплакивать твой пепел.&" +
+                           "Стреляй!", 1, 4)
             }); 
             _dialoguesQueue.RemoveAt(0);
         }
@@ -235,7 +234,8 @@ namespace Components.Episode_1
         {
             _dialog.StartDialog(new List<Dialog>
             {
-                new Dialog("очистил планету от врагов", 1, 4)
+                new Dialog("Фух, кажется отбились", 1, 4),
+                new Dialog("Ты победил в битве, но в войне! Жди, скоро настанет твой час.", 2, 4)
             }); 
             _dialoguesQueue.RemoveAt(0);
         }
