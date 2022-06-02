@@ -13,9 +13,16 @@ public class PrefabsSpawnerEditor : Editor
 
     public void OnEnable()
     {
-        _prefabsSpawner = (PrefabsSpawner) target;
-        _names = _prefabsSpawner.Names;
-        _gameObjects = _prefabsSpawner.GameObjects;
+        try
+        {
+            _prefabsSpawner = (PrefabsSpawner) target;
+            _names = _prefabsSpawner.Names;
+            _gameObjects = _prefabsSpawner.GameObjects;
+        }
+        catch (Exception e)
+        {
+            // ignored
+        }
     }
 
     public override void OnInspectorGUI()

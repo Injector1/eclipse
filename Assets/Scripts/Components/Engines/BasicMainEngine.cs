@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class BasicMainEngine : Engine
 {
-    [SerializeField] private float MaxSpeedSqr = 200f;
-    [SerializeField] private float Power = 0.1f;
-    [SerializeField] private float Maneuverability = 4.5f;
-    [SerializeField] private float OnRotateSlowDown = 20f;
+    [SerializeField] public float MaxSpeedSqr = 200f;
+    [SerializeField] public float Power = 0.1f;
+    [SerializeField] public float Maneuverability = 4.5f;
+    [SerializeField] public float OnRotateSlowDown = 20f;
     private Rigidbody2D _rigidbody;
     private Transform _spaceshipTransform;
     private Vector3 _spaceshipDirection;
