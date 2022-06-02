@@ -5,7 +5,7 @@ public class MainMenu : MonoBehaviour
 {
     public void PlaySandbox()
     {
-        SceneManager.LoadScene(3); 
+        SceneManager.LoadScene(4); 
     }
     
     public void PlayGame()
