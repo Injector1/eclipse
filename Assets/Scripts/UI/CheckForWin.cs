@@ -10,11 +10,11 @@ public class CheckForWin : MonoBehaviour
     [SerializeField] public GameObject victoryWindow;
     [SerializeField] public GameObject[] ratings;
     
-    public void GetEpisodeResult(int rating, float gameTime)
+    public void GetEpisodeResult(int rating, int min, int sec)
     {
-        Time.timeScale = 0.2f;
+        Time.timeScale = 0.1f;
         
-        result.text = gameTime.ToString(CultureInfo.InvariantCulture);
+        result.text = $"{min}:{sec % 60}";
         victoryWindow.SetActive(true);
         ratings[rating].SetActive(true);
 

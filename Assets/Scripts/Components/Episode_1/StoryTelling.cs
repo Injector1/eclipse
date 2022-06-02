@@ -14,7 +14,8 @@ namespace Components.Episode_1
         private GameObject _utilities;
         private DateTime _inGameTime;
         private bool _endOfFirstDialogue;
-        
+
+        private CheckForWin _winChecker;
         private GameObserver _observer;
         private InGameDialog _dialog;
         private PrefabsSpawner _spawner;
@@ -24,6 +25,7 @@ namespace Components.Episode_1
         private void Awake()
         {
             _utilities = GameObject.Find("Utilities");
+            _winChecker = _utilities.GetComponent<CheckForWin>();
             _observer = _utilities.GetComponent<GameObserver>();
             _dialog = _utilities.GetComponent<InGameDialog>();
             _spawner = _utilities.GetComponent<PrefabsSpawner>();
@@ -31,13 +33,25 @@ namespace Components.Episode_1
             _dialoguesQueue = new List<Action>
             {
                 GameStart, FirstEnemy, FirstEnemyKill, NearToStation, FirstStationKill, NearToPlanet,
-                ClearPlanet, FarFromPlanet
+                 FarFromPlanet
             };
         }
 
         private void Update()
         {
             if (_dialoguesQueue.Count == 0) return;
+            
+            if (DistanceToPlanet() > 100 && _dialoguesQueue[0] == FarFromPlanet)
+            {
+                FarFromPlanet();
+                return;
+            }
+            
+            // if (false && _dialoguesQueue[0] == ClearPlanet)
+            // {
+            //     ClearPlanet();
+            //     return;
+            // }
             
             if (DistanceToPlanet() < 40 && _dialoguesQueue[0] == NearToPlanet)
             {
@@ -113,13 +127,11 @@ namespace Components.Episode_1
 
         private void SpawnEnemyNearToPlanet()
         {
-            var positions = new Vector3[]
+            foreach (var pos in new Vector3[]
             {
-                new Vector3(-140, 160, 0), new Vector3(-146, 162, 0), new Vector3(-125, 157, 0), new Vector3(-117, 158, 0)
-            };
-            
-            for (int i = 0; i < 4; i++)
-                _spawner.Spawn("Enemy", positions[i]);
+                new Vector3(-100, 74, 0)
+            }
+            ) _spawner.Spawn("Enemy", pos);
         }
 
         private void SpawnEnemyNearToPlayer(int offset)
@@ -230,10 +242,11 @@ namespace Components.Episode_1
         
         private void FarFromPlanet()
         {
-            _dialog.StartDialog(new List<Dialog>
-            {
-                new Dialog("ты достатончо далеко от планеты", 1, 4)
-            }); 
+            var rating = 1;
+            var gameTime = DateTime.Now - _observer.GameStartTime;
+            if (gameTime.Seconds < 3 * 60) rating = 3;
+            else if (gameTime.Seconds < 5 * 60) rating = 2;
+            _winChecker.GetEpisodeResult(rating, gameTime.Minutes, gameTime.Seconds);
             _dialoguesQueue.RemoveAt(0);
         }
     }

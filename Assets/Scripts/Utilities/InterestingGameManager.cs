@@ -39,6 +39,7 @@ public class InterestingGameManager : MonoBehaviour
 
         if (n == 0 && !_isGameEnded) winFrame.GetComponent<CheckForWin>().GetEpisodeResult(
                 GetRating(),
+                (DateTime.Now - _gameObserver.GameStartTime).Minutes,
                 (DateTime.Now - _gameObserver.GameStartTime).Seconds);
     }
 
