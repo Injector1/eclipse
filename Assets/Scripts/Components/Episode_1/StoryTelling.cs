@@ -10,10 +10,10 @@ namespace Components.Episode_1
     public class StoryTelling : MonoBehaviour
     {
         [SerializeField] private GameObject planet;
-        [SerializeField] private GameObject[] spawners;
         
         private GameObject _utilities;
         private DateTime _clearPlanetTime;
+        private int _killsCount;
 
         private CheckForWin _winChecker;
         private GameObserver _observer;
@@ -47,7 +47,7 @@ namespace Components.Episode_1
                 return;
             }
             
-            if (spawners.All(s => !s.activeSelf) && _dialoguesQueue[0] == ClearPlanet)
+            if (_observer.EnemyKillsCount - _killsCount == 6 && _dialoguesQueue[0] == ClearPlanet)
             {
                 _clearPlanetTime = DateTime.Now;
                 ClearPlanet();
@@ -56,6 +56,7 @@ namespace Components.Episode_1
             
             if (DistanceToPlanet() < 40 && _dialoguesQueue[0] == NearToPlanet)
             {
+                _killsCount = _observer.EnemyKillsCount;
                 NearToPlanet();
                 return;
             }

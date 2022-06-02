@@ -330,7 +330,7 @@ MonoBehaviour:
   EntityToSpawn: {fileID: 936567076}
   MinSpawnRadius: 1
   MaxSpawnRadius: 5
-  SpawnDelay: 2
+  SpawnDelay: 3
   DelayDeviation: 0.2
   MinDistanceToSpawn: 20
   EnemyCountToSpawn: 3
@@ -1269,9 +1269,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   planet: {fileID: 1574050891}
-  spawners:
-  - {fileID: 898292585}
-  - {fileID: 158617983}
 --- !u!1 &536855685
 GameObject:
   m_ObjectHideFlags: 0
@@ -2592,7 +2589,7 @@ MonoBehaviour:
   EntityToSpawn: {fileID: 936567076}
   MinSpawnRadius: 1
   MaxSpawnRadius: 5
-  SpawnDelay: 2
+  SpawnDelay: 3
   DelayDeviation: 0.2
   MinDistanceToSpawn: 20
   EnemyCountToSpawn: 3
@@ -5167,6 +5164,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 187337681840783904, guid: ff36c9e47adb7974b99db4320acd4fe9, type: 3}
+      propertyPath: planet
+      value: 
+      objectReference: {fileID: 1574050891}
     - target: {fileID: 187337681840783905, guid: ff36c9e47adb7974b99db4320acd4fe9, type: 3}
       propertyPath: Player
       value: 

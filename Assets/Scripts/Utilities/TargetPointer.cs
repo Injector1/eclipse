@@ -9,6 +9,7 @@ namespace Utilities
 	{
 		[SerializeField] private RectTransform stationPointer;
 		[SerializeField] private RectTransform enemyPointer;
+		[SerializeField] private GameObject planet;
 
 		private GameObserver _observer;
 		private Vector3 _startPointerSize;
@@ -61,8 +62,13 @@ namespace Utilities
 				var target = GetNearestTarget(_targets[pointer]);
 				if (target is null)
 				{
-					pointer.gameObject.SetActive(false);
-					return;
+					if (pointer != stationPointer)
+					{
+						pointer.gameObject.SetActive(false);
+						return;
+					}
+					else
+						target = planet;
 				}
 			
 				var realPos = _mainCamera.WorldToScreenPoint(target.transform.position);

@@ -36,12 +36,9 @@ public class SpawnerBody : MonoBehaviour
     {
         if (_stopFlag) return;
 
-        if (MinDistanceToSpawn < 1e-9 || GetDistanceToPlayer() < MinDistanceToSpawn)
+        if (MinDistanceToSpawn < 1e-9 || GetDistanceToPlayer() < MinDistanceToSpawn && EnemyCountToSpawn-- > 0)
         {
-            if (EnemyCountToSpawn-- > 0)
-                _spawner.Spawn(
-                    "Enemy", transform.position + _random.GetRandomVector(MinSpawnRadius, MaxSpawnRadius), _random.GetFloat());
-            else gameObject.SetActive(false);
+            _spawner.Spawn("Enemy", transform.position + _random.GetRandomVector(MinSpawnRadius, MaxSpawnRadius), _random.GetFloat());
         }
 
 
