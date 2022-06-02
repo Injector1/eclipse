@@ -10,6 +10,7 @@ public class SpawnerBody : MonoBehaviour
     [SerializeField] private float SpawnDelay;
     [SerializeField] private float DelayDeviation;
     [SerializeField] public double MinDistanceToSpawn;
+    [SerializeField] public int EnemyCountToSpawn;
     
     private GameObserver _observer;
     private RandomExtensions _random;
@@ -34,10 +35,10 @@ public class SpawnerBody : MonoBehaviour
     private void Spawn()
     {
         if (_stopFlag) return;
-        
-        if (MinDistanceToSpawn < 1e-9 || GetDistanceToPlayer() < MinDistanceToSpawn)
+
+        if ((MinDistanceToSpawn < 1e-9 || GetDistanceToPlayer() < MinDistanceToSpawn) && (EnemyCountToSpawn--) > 0)
             _spawner.Spawn("Enemy", transform.position + _random.GetRandomVector(MinSpawnRadius, MaxSpawnRadius), _random.GetFloat());
-            
+        
         this.StartCoroutine(Spawn, (int) (SpawnDelay + 2 * (_random.GetFloat() - 0.5f) * DelayDeviation * SpawnDelay));
     }
     
