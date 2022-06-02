@@ -481,7 +481,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7788420166023067625, guid: 734c8a3853a04824e8c89833795310e3, type: 3}
       propertyPath: m_Mass
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7788420166023067625, guid: 734c8a3853a04824e8c89833795310e3, type: 3}
       propertyPath: m_Constraints
@@ -1159,7 +1159,6 @@ GameObject:
   m_Component:
   - component: {fileID: 488195785}
   - component: {fileID: 488195786}
-  - component: {fileID: 488195787}
   m_Layer: 0
   m_Name: Main Scene
   m_TagString: Untagged
@@ -1282,18 +1281,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &488195787
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 488195784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3883f812f1b463ab1e642214a24a3e0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &568837771
 GameObject:
   m_ObjectHideFlags: 0
@@ -1873,7 +1860,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 3
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2377,6 +2364,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bbeb03d509f74226a18a59cabf2c0c0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaxDistance: 10
+  MinDistance: 1
 --- !u!114 &836796425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2411,7 +2400,7 @@ MonoBehaviour:
   m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 3
+    OrthographicSize: 6
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -2503,6 +2492,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 860646959}
   m_CullTransparentMesh: 1
+--- !u!1 &881132323 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 187337681840783906, guid: ff36c9e47adb7974b99db4320acd4fe9, type: 3}
+  m_PrefabInstance: {fileID: 187337682268642050}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &881132331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 881132323}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3883f812f1b463ab1e642214a24a3e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &894491599
 GameObject:
   m_ObjectHideFlags: 0
@@ -5329,6 +5335,10 @@ PrefabInstance:
     - target: {fileID: 187337683088227178, guid: ff36c9e47adb7974b99db4320acd4fe9, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 187337683448755453, guid: ff36c9e47adb7974b99db4320acd4fe9, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 187337683700256252, guid: ff36c9e47adb7974b99db4320acd4fe9, type: 3}
       propertyPath: m_Text

@@ -24,14 +24,13 @@ public class InterestingGameManager : MonoBehaviour
     {
         _playerHealth.OnDeath -= _playerHealth.BasicDeath;
         _playerHealth.OnDeath += PlayerDeath;
-        _gameObserver.OnEntityDeath += _ => CheckStationCount();
+        //_gameObserver.OnEntityDeath += _ => CheckStationCount();
     }
 
     private void PlayerDeath()
     {
         Time.timeScale = 0.2f;
         loseFrame.SetActive(true);
-        //EventPlanner.PostponeAnEvent(() => SceneManager.LoadScene(SceneManager.GetActiveScene().name), 1200);
     }
     
     private void CheckStationCount()
