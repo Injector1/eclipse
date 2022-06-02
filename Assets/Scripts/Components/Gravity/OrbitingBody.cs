@@ -26,13 +26,13 @@ public class OrbitingBody : MonoBehaviour
     private void Start()
     {
         _gravity = OnOrbitOf.GetComponent<Gravity>();
-        GetComponent<GravityVisitor>().IsOnOrbit = true;
+        GetComponent<GravityVisitor>().DontTouchMe = true;
         U = (_gravity._rigidbody.mass + _rigidbody.mass) * Gravity.G;
         var dirVector = _gravity.transform.position - transform.position;
         _orbitRadius = dirVector.magnitude;
         T = 2 * Mathf.PI * Mathf.Sqrt(_orbitRadius * _orbitRadius * _orbitRadius / U);
         _speed = Mathf.Sqrt(U / _orbitRadius);
-        _orbitTime = T * Vector2.Angle(Vector2.right, -dirVector) / 360;
+        _orbitTime = OrbitDirection * T * Vector2.Angle(Vector2.right, -dirVector) / 360;
         _orbitUpdateTick = T / 100;
         Orbiting();
     }

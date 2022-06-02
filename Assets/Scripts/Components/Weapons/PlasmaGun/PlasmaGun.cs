@@ -6,9 +6,9 @@ using Random = System.Random;
 
 public class PlasmaGun : Weapon
 {
-    [SerializeField] private float Spreading;
+    [SerializeField] public float Spreading;
     [SerializeField] private GameObject GameObjectWithBullets;
-    [SerializeField] private float BulletSpeed;
+    [SerializeField] public float BulletSpeed;
 
     private WeaponController _weaponController;
     private CoolDown _coolDown;

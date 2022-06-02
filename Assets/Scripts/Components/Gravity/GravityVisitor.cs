@@ -4,7 +4,7 @@ using UnityEngine;
 public class GravityVisitor : MonoBehaviour
 {
     [NonSerialized] public Rigidbody2D _rigidbody;
-    public bool IsOnOrbit;
+    public bool DontTouchMe;
 
     private void Awake()
     {

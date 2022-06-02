@@ -22,6 +22,8 @@ public class Gravity : MonoBehaviour
         foreach (var visitor in visitors)
             try
             {
+                if (visitor.DontTouchMe)
+                    continue;
                 var direction = transform.position - visitor.transform.position;
                 var gravityForce = G * _rigidbody.mass * visitor._rigidbody.mass / direction.sqrMagnitude;
                 visitor.AddGravityForce(direction.normalized * gravityForce);
@@ -37,7 +39,7 @@ public class Gravity : MonoBehaviour
     public void OnEnterGravityZoneTrigger(Collider2D other)
     {
         var visitor = other.GetComponent<GravityVisitor>();
-        if (visitor != null && !visitor.IsOnOrbit && !orbitingBodies.Contains(visitor))
+        if (visitor != null && !visitor.DontTouchMe && !orbitingBodies.Contains(visitor))
             visitors.Add(visitor);
     }
     

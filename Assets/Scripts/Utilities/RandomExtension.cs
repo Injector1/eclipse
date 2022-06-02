@@ -7,6 +7,7 @@ public class RandomExtensions
     private Random _random;
 
     public RandomExtensions() => _random = new Random(Seed);
+    public RandomExtensions(bool flag) => _random = new Random();
 
     public float GetFloat() => (float) _random.NextDouble();
 

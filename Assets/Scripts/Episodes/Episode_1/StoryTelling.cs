@@ -237,7 +237,7 @@ namespace Components.Episode_1
             _dialog.StartDialog(new List<Dialog>
             {
                 new Dialog("Фух, кажется отбились", 1, 4),
-                new Dialog("Ты победил в битве, но в войне! Жди, скоро настанет твой час.", 2, 4)
+                new Dialog("Ты победил в битве, но не в войне! Жди, скоро настанет твой час.", 2, 4)
             }); 
             _dialoguesQueue.RemoveAt(0);
         }
